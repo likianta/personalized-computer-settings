@@ -1,0 +1,25 @@
+[tool.poetry]
+name = "mypc-settings"
+version = "0.1.0"
+description = ""
+authors = ["likianta <likianta@foxmail.com>"]
+# readme = "README.md"
+packages = [{ include = "mypc_settings" }]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+lk-utils = "^2.9.3"
+
+[[tool.poetry.source]]
+name = "tsinghua"
+url = "https://pypi.tuna.tsinghua.edu.cn/simple/"
+priority = "primary"
+
+[[tool.poetry.source]]
+name = "likianta-hosted"
+url = "http://likianta.pro:2006/"
+priority = "supplemental"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
