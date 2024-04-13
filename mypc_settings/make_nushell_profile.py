@@ -142,6 +142,9 @@ def main(
         ),
         '$env.PROMPT_COMMAND = {{|| $env.PWD | split row "{}" | last }}'
         .format('/' if platform != 'win32' else '\\\\'),
+        # do not show timestamp on right prompt in windows, because it may be -
+        # chinese sans-serif font which looks not good.
+        '$env.PROMPT_COMMAND_RIGHT = ""' if platform == 'win32' else '',
         '$env.LIKIANTA_HOME = "{}"'.format(home),
         '',
         '$env.PATH = [\n    {}\n]'.format(join((f'"{x}",' for x in paths), 4)),
