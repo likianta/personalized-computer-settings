@@ -1,4 +1,5 @@
 import os
+import re
 import sys
 
 from lk_utils import call_once
@@ -14,7 +15,7 @@ def _change_dir_to_likianta_home() -> None:
         case 'linux':
             os.chdir('/home/likianta/Desktop')
         case 'win32':
-            os.chdir('D:/Likianta')  # TEST
+            os.chdir('C:/Likianta')  # TEST
 
 
 def main() -> None:
@@ -29,7 +30,7 @@ def main() -> None:
         case 'win32':
             io_map = {
                 'apps'                                  : '...',
-                'apps/nushell/{ver}/nu.exe'             : 'shortcut/nushell.exe',
+                'apps/nushell/nu.exe'                   : 'shortcut/nushell.exe',
                 'apps/python/3.12'                      : 'shortcut/python-3.12',
                 'documents'                             : '...',
                 'documents/appdata'                     : '...',
@@ -49,8 +50,11 @@ def main() -> None:
             x = _find_latest_version(i.split('{ver}')[0])
             i = i.replace('{ver}', x)
         if '{date}' in i:
-            x = _find_latest_version(i.split('{date}')[0])
+            x = _find_latest_date(i.split('{date}')[0])
             i = i.replace('{date}', x)
+        if not fs.exists(i):
+            print(':iv3', f'could not find "{i}"')
+            continue
         
         if o == '...':
             o = 'shortcut/{}'.format(i.rsplit('/', 1)[-1])
@@ -59,8 +63,8 @@ def main() -> None:
         # postfix `o`
         if i.startswith('temp/'):
             yyyy_mm = timestamp('y-m')
-            assert i == 'temp/{}'.format(yyyy_mm)
-            assert o == 'shortcut/{}'.format(yyyy_mm)
+            assert i == 'temp/{}'.format(yyyy_mm), i
+            assert o == 'shortcut/{}'.format(yyyy_mm), o
             o = f'shortcut/temp-({yyyy_mm})'
         
         print('[red]{}[/] -> [green]{}[/]'.format(i, o), ':ir')
@@ -68,7 +72,10 @@ def main() -> None:
 
 
 def _find_latest_date(dir: str) -> str:
-    return fs.find_dir_names(dir)[-1]  # TODO
+    for f in fs.find_dirs(dir):
+        if re.match(r'\d{4}-\d{2}', f.name):
+            return f.name
+    raise FileNotFoundError
 
 
 def _find_latest_version(dir: str) -> str:
