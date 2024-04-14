@@ -104,7 +104,7 @@ def make_shortcut_win32(file_i: str, file_o: str = None) -> None:
     if os.path.exists(file_o):
         os.remove(file_o)
     
-    vbs = '_temp.vbs'
+    vbs = fs.xpath('../_temp.vbs')
     command = dedent('''
         Set objWS = WScript.CreateObject("WScript.Shell")
         lnkFile = "{file_o}"
