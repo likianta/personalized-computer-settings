@@ -10,6 +10,8 @@ from lk_utils.textwrap import join
 @cli.cmd()
 def main(
     file: str = None,
+    *,
+    no_welcom_message: bool = False,
     pyversion: str = '3.12',  # suggest '3.11' or later
 ) -> None:
     # iswin = os.name == 'nt'
@@ -140,6 +142,7 @@ def main(
             '[make_nushell_profile.py](https://github.com/likianta/personal'
             '-settings/blob/main/mypc_settings/make_nushell_profile.py)'
         ),
+        '$env.config.show_banner = false' if no_welcom_message else '',
         '$env.PROMPT_COMMAND = {{|| $env.PWD | split row "{}" | last }}'
         .format('/' if platform != 'win32' else '\\\\'),
         # do not show timestamp on right prompt in windows, because it may be -
