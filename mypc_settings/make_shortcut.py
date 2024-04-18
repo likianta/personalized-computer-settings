@@ -37,26 +37,19 @@ def main() -> None:
             raise NotImplementedError
     
     for i, o in io_map.items():
-        if '{ver}' in i:
-            x = _find_latest_version(i.split('{ver}')[0])
-            i = i.replace('{ver}', x)
-        if '{date}' in i:
-            x = _find_latest_date(i.split('{date}')[0])
-            i = i.replace('{date}', x)
+        if '{' in i:
+            a, b = i.rsplit('/', 1)
+            i = a + '/' + _fill_name(b, a)
         if not fs.exists(i):
             print(':iv3', f'could not find "{i}"')
             continue
-        
+            
         if o == '...':
             o = 'shortcut/{}'.format(i.rsplit('/', 1)[-1])
-        else:
-            assert o.startswith('shortcut/')
-        # postfix `o`
-        if i.startswith('temp/'):
-            yyyy_mm = timestamp('y-m')
-            assert i == 'temp/{}'.format(yyyy_mm), i
-            assert o == 'shortcut/{}'.format(yyyy_mm), o
-            o = f'shortcut/temp-({yyyy_mm})'
+        elif '{' in o:
+            a, b = o.rsplit('/', 1)
+            o = a + '/' + _fill_name(b)
+        assert o.startswith('shortcut/')
         
         print('[red]{}[/] -> [green]{}[/]'.format(i, o), ':ir')
         if fs.exists(o):
@@ -102,6 +95,21 @@ def make_shortcut_win32(file_i: str, file_o: str = None) -> None:
     dumps(command, vbs, ftype='plain')
     
     run_cmd_args('cscript', '/nologo', vbs)
+
+
+def _fill_name(name: str, dir: str = None) -> str:
+    # static
+    name = (
+        name
+        .replace('{yyyy}', timestamp('y'))
+        .replace('{mm}', timestamp('m'))
+    )
+    # dynamic
+    if '{date}' in name:
+        name = name.replace('{ver}', _find_latest_date(dir))
+    if '{ver}' in name:
+        name = name.replace('{ver}', _find_latest_version(dir))
+    return name
 
 
 def _find_latest_date(dir: str) -> str:
