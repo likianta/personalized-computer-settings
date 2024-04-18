@@ -6,6 +6,7 @@ from textwrap import dedent
 from lk_utils import call_once
 from lk_utils import dumps
 from lk_utils import fs
+from lk_utils import loads
 from lk_utils import mklink
 from lk_utils import run_cmd_args
 from lk_utils import timestamp
@@ -31,26 +32,7 @@ def main() -> None:
         #         'temp/{date}': '...',
         #     }
         case 'win32':
-            io_map = {
-                'applist'                               : '...',
-                'apps'                                  : '...',
-                # 'apps/nushell/nu.exe'                   : 'shortcut/nushell.exe',
-                'apps/python/3.12'                      : 'shortcut/python-3.12',
-                'backups'                               : '...',
-                'backups/software-packages'             : '...',
-                'backups/software-settings'             : '...',
-                'documents'                             : '...',
-                'documents/appdata'                     : '...',
-                'documents/gitbook-ssg'                 : 'shortcut/gitbook',
-                'downloads'                             : '...',
-                'pictures'                              : '...',
-                'temp'                                  : '...',
-                'temp/{date}'                           : '...',
-                'workspace'                             : '...',
-                'workspace/com.jlsemi.likianta'         : '...',
-                'workspace/dev.master.likianta'         : '...',
-                'workspace/playground/python-playground': '...',
-            }
+            io_map = loads(fs.xpath('../config/windows_shortcuts.yaml'))['map']
         case _:
             raise NotImplementedError
     
@@ -77,6 +59,8 @@ def main() -> None:
             o = f'shortcut/temp-({yyyy_mm})'
         
         print('[red]{}[/] -> [green]{}[/]'.format(i, o), ':ir')
+        if fs.exists(o):
+            continue
         if sys.platform == 'win32':
             make_shortcut_win32(i, o + '.lnk')
         else:
