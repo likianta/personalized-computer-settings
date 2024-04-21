@@ -1,0 +1,32 @@
+alias:
+  py: <home>/apps/python/3.12/python.exe
+  pip: <py> -m pip
+  po: <py> -m poetry
+  por: <po> run
+  pou: <po> update
+  pox: <po> run python
+  st: <por> streamlit
+  strun: <por> streamlit run --server.headless true --server.port
+environment:
+  PYTHONPATH:
+    - .
+    - src
+    - lib
+  PATH:
+    - <home>/apps/bore
+    - <home>/apps/caddy
+    - <home>/apps/flutter/3.7/bin
+    - <home>/apps/git/cmd
+    - <home>/apps/go/1.20/bin
+    - <home>/apps/jetbrains-toolbox/scripts
+    - <home>/apps/nodejs/20.3/bin
+    - <home>/apps/nodejs/global_modules
+    - <home>/apps/nodejs/pnpm
+    - <home>/apps/nushell
+    - <home>/apps/python/3.12
+    - <home>/apps/python/3.12/scripts
+    - <home>/apps/vscode/bin
+    - C:/Windows
+    - C:/Windows/System32
+    - C:/Windows/System32/OpenSSH
+    - C:/Windows/System32/Wbem
