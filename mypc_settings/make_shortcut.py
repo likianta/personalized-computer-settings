@@ -1,5 +1,4 @@
 import os
-import re
 import sys
 from textwrap import dedent
 
@@ -9,7 +8,8 @@ from lk_utils import fs
 from lk_utils import loads
 from lk_utils import mklink
 from lk_utils import run_cmd_args
-from lk_utils import timestamp
+
+from mypc_settings.common import reformat_path
 
 
 @call_once()
@@ -23,8 +23,8 @@ def _change_dir_to_likianta_home() -> None:
 
 
 def _load_config() -> dict:
-    cfg_dir = fs.xpath('../config')
-    usr_dir = fs.xpath('../config/user')
+    cfg_dir = fs.xpath('../config/shortcut_map')
+    usr_dir = fs.xpath('../config/shortcut_map/user')
     match sys.platform:
         case 'win32':
             cfg = loads(f'{cfg_dir}/windows_shortcuts.yaml')
@@ -42,7 +42,7 @@ def main() -> None:
     # root = 'shortcut'
     io_map = _load_config()['map']
     for i, o in io_map.items():
-        i = finish_path(i)
+        i = reformat_path(i)
         if not fs.exists(i):
             print(':iv3', f'could not find "{i}"')
             continue
@@ -50,7 +50,7 @@ def main() -> None:
         if o == '...':
             o = 'shortcut/{}'.format(i.rsplit('/', 1)[-1])
         else:
-            o = finish_path(o)
+            o = reformat_path(o)
         assert o.startswith('shortcut/')
         
         print('[red]{}[/] -> [green]{}[/]'.format(i, o), ':ir')
@@ -97,46 +97,6 @@ def make_shortcut_win32(file_i: str, file_o: str = None) -> None:
     dumps(command, vbs, ftype='plain')
     
     run_cmd_args('cscript', '/nologo', vbs)
-
-
-def finish_path(path: str) -> str:
-    _parent = fs.parent(path)  # a dir path
-    
-    def inplace(m: re.Match) -> str:
-        item = m.group(1)
-        match item:
-            case 'date':
-                return _find_latest_date(_parent)
-            case 'mm':
-                return timestamp('m')
-            case 'yyyy':
-                return timestamp('y')
-            case 'ver':
-                return _find_latest_version(_parent)
-        
-        if sys.platform == 'win32':
-            match item:
-                case 'appdata':
-                    return 'C:/Users/Likianta/AppData'
-                case 'start_menu':
-                    return 'C:/Users/Likianta/AppData/Roaming/Microsoft/Windows/Start Menu'
-                case 'user_home':
-                    return 'C:/Users/Likianta'
-        
-        raise Exception(item)
-    
-    return re.sub(r'<(\w+)>', inplace, path)
-
-
-def _find_latest_date(dir: str) -> str:
-    for f in fs.find_dirs(dir):
-        if re.match(r'\d{4}-\d{2}', f.name):
-            return f.name
-    raise FileNotFoundError
-
-
-def _find_latest_version(dir: str) -> str:
-    return fs.find_dir_names(dir)[-1]  # TODO
 
 
 if __name__ == '__main__':

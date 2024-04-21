@@ -1,0 +1,5 @@
+home: C:/Likianta
+inherit: true
+map:
+  <start_menu>/Programs/Scoop Apps: shortcut/scoop-applist
+  <user_home>/scoop/apps: shortcut/scoop-apps
