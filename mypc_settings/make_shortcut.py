@@ -22,16 +22,25 @@ def _change_dir_to_likianta_home() -> None:
             os.chdir('C:/Likianta')  # TEST
 
 
-def main() -> None:
-    # root = 'shortcut'
-    
-    # noinspection PyCompatibility
+def _load_config() -> dict:
+    cfg_dir = fs.xpath('../config')
+    usr_dir = fs.xpath('../config/user')
     match sys.platform:
         case 'win32':
-            io_map = loads(fs.xpath('../config/windows_shortcuts.yaml'))['map']
-        case _:
-            raise NotImplementedError
-    
+            cfg = loads(f'{cfg_dir}/windows_shortcuts.yaml')
+            if fs.exists(x := f'{usr_dir}/windows_shortcuts.yaml'):
+                temp = loads(x)
+                if temp.get('inherit', False):
+                    cfg['map'].update(temp['map'])
+                else:
+                    cfg = temp
+            return cfg
+    raise NotImplementedError
+
+
+def main() -> None:
+    # root = 'shortcut'
+    io_map = _load_config()['map']
     for i, o in io_map.items():
         i = finish_path(i)
         if not fs.exists(i):
@@ -100,13 +109,21 @@ def finish_path(path: str) -> str:
                 return _find_latest_date(_parent)
             case 'mm':
                 return timestamp('m')
-            case 'user_home':
-                assert sys.platform == 'win32'
-                return 'C:/Users/Likianta'  # TODO
             case 'yyyy':
                 return timestamp('y')
             case 'ver':
                 return _find_latest_version(_parent)
+        
+        if sys.platform == 'win32':
+            match item:
+                case 'appdata':
+                    return 'C:/Users/Likianta/AppData'
+                case 'start_menu':
+                    return 'C:/Users/Likianta/AppData/Roaming/Microsoft/Windows/Start Menu'
+                case 'user_home':
+                    return 'C:/Users/Likianta'
+        
+        raise Exception(item)
     
     return re.sub(r'<(\w+)>', inplace, path)
 
