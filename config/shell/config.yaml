@@ -1,4 +1,5 @@
 alias:
+  pc: <home>/apps/jetbrains-toolbox/scripts/pycharm
   py: <home>/apps/python/3.12/python.exe
   pip: <py> -m pip
   po: <py> -m poetry
@@ -8,10 +9,7 @@ alias:
   st: <por> streamlit
   strun: <por> streamlit run --server.headless true --server.port
 environment:
-  PYTHONPATH:
-    - .
-    - src
-    - lib
+  NODE_PATH: <home>/apps/nodejs/global_modules/node_modules
   PATH:
     - <home>/apps/bore
     - <home>/apps/caddy
@@ -30,3 +28,8 @@ environment:
     - C:/Windows/System32
     - C:/Windows/System32/OpenSSH
     - C:/Windows/System32/Wbem
+  PNPM_HOME: <home>/apps/nodejs/pnpm
+  PYTHONPATH:
+    - .
+    - src
+    - lib

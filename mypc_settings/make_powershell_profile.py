@@ -40,9 +40,10 @@ def main(
     output.append('')
     
     # env vars
-    for key, vals in cfg['environment'].items():
+    for key, val in cfg['environment'].items():
+        if isinstance(val, str): val = (val,)
         output.append('Set-Item -Path env:{} -Value "{}"'.format(
-            key, ';'.join(map(reformat_path, vals))
+            key, ';'.join(map(reformat_path, val))
         ))
     output.append('')
     
