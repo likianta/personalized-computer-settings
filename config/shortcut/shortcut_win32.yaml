@@ -1,0 +1,10 @@
+inherit: true
+home: C:/Likianta
+map:
+  <inherit>: ...
+  <home>/pictures/收集: <shortcut>/pictures-inbox
+  <home>/pictures/收集/<yyyy>: <shortcut>/pictures-inbox-(<yyyy>)
+  <home>/workspace/com_jlsemi_likianta: <shortcut>/likianta.jlsemi.com
+  <home>/workspace/dev_master_likianta: <shortcut>/likianta.master.dev
+  <start_menu>/Programs/Scoop Apps: <shortcut>/scoop-applist
+  <user_home>/scoop/apps: <shortcut>/scoop-apps

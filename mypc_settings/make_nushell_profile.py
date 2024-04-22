@@ -13,7 +13,9 @@ def main(
     output_file: str = None,
     no_welcom_message: bool = False,
 ) -> None:
-    cfg = common.loads_config(fs.xpath('../config/shell/config.yaml'))
+    cfg = common.loads_config(
+        fs.xpath(f'../config/shell/config_{sys.platform}.yaml')
+    )
     # iswin = os.name == 'nt'
     # home = 'C:/Likianta' if iswin else '/Users/Likianta/Desktop'
     platform = sys.platform  # 'darwin', 'linux', 'win32'
@@ -47,11 +49,13 @@ def main(
             ))
         else:
             output.append('$env.{} = "{}"'.format(key, ';'.join(val)))
+    output.append('')
     
     # alias
     for key, val in cfg['alias'].items():
         common.print_conversion(key, val)
         output.append('alias {} = {}'.format(key, val))
+    output.append('')
     
     output_file = output_file or \
                   home + '/documents/appdata/nushell/likianta-profile.nu'

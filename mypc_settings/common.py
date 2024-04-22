@@ -6,15 +6,62 @@ from lk_utils import fs
 from lk_utils import loads
 from lk_utils import timestamp
 
+home = (
+    '/Users/Likianta/Desktop' if sys.platform == 'darwin' else
+    '/home/likianta/Desktop' if sys.platform == 'linux' else
+    'C:/Likianta'  # win32
+)
 
-def loads_config(path: str) -> dict:
-    data = loads(path)
-    # TODO: sort and deduplicate
-    data['alias'] = reformat_aliases(data['alias'])
-    data['environment'] = {
-        k: map(reformat_path, ((v,) if isinstance(v, str) else v))
-        for k, v in data['environment'].items()
-    }
+
+def loads_config(file: str) -> dict:
+    if '_' in fs.basename(file):
+        a, b, c = fs.split(file, 3)
+        base_config_file = '{}/{}.{}'.format(a, b.split('_')[0], c)
+        base_config = loads(base_config_file)
+        user_config = loads(file)
+        
+        def inplace_nodes(node: dict, base: dict) -> None:
+            # no_inherit_case_in_leftovers = False
+            for k, v in tuple(node.items()):
+                if k == '<inherit>':
+                    node.update(base)
+                    # no_inherit_case_in_leftovers = True
+                    continue
+                if isinstance(v, dict):
+                    assert isinstance(base[k], dict)
+                    inplace_nodes(v, base[k])
+                elif isinstance(v, list):
+                    temp = []
+                    for x in v:
+                        assert isinstance(x, str)
+                        if x == '<inherit>':
+                            assert isinstance(base[k], list)
+                            temp.extend(base[k])
+                        else:
+                            temp.append(x)
+                    node[k] = temp
+                else:
+                    continue
+        
+        inplace_nodes(user_config, base_config)
+        data = user_config
+    else:
+        data = loads(file)
+        
+    if 'map' in data:
+        data['map'] = {
+            reformat_path(k): reformat_path(v)
+            for k, v in data['map'].items()
+        }
+    if 'alias' in data:
+        # TODO: sort and deduplicate
+        data['alias'] = reformat_aliases(data['alias'])
+    if 'environment' in data:
+        data['environment'] = {
+            k: map(reformat_path, ((v,) if isinstance(v, str) else v))
+            for k, v in data['environment'].items()
+        }
+        
     return data
 
 
@@ -59,19 +106,11 @@ def reformat_path(
                     case 'win32':
                         return 'C:/Users/Likianta/Desktop'
             case 'home':
-                match sys.platform:
-                    case 'darwin':
-                        return '/Users/Likianta/Desktop'
-                    case 'linux':
-                        return '/home/likianta/Desktop'
-                    case 'win32':
-                        return 'C:/Likianta'
+                return home
             case 'mm':
                 return timestamp('m')
-            case 'yyyy':
-                return timestamp('y')
-            case 'ver':
-                return _find_latest_version(_parent)
+            case 'shortcut':
+                return f'{home}/shortcut'
             case 'user_home':
                 match sys.platform:
                     case 'darwin':
@@ -80,6 +119,10 @@ def reformat_path(
                         return '/home/likianta'
                     case 'win32':
                         return 'C:/Users/Likianta'
+            case 'ver':
+                return _find_latest_version(_parent)
+            case 'yyyy':
+                return timestamp('y')
         
         if sys.platform == 'win32':
             match item:

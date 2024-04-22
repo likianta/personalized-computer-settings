@@ -13,6 +13,7 @@ alias:
 environment:
   NODE_PATH: <home>/apps/nodejs/global_modules/node_modules
   PATH:
+    - <home>/apps/alist
     - <home>/apps/bore
     - <home>/apps/caddy
     - <home>/apps/flutter/3.7/bin
@@ -26,10 +27,6 @@ environment:
     - <home>/apps/python/3.12
     - <home>/apps/python/3.12/scripts
     - <home>/apps/vscode/bin
-    - C:/Windows
-    - C:/Windows/System32
-    - C:/Windows/System32/OpenSSH
-    - C:/Windows/System32/Wbem
   PNPM_HOME: <home>/apps/nodejs/pnpm
   PYTHONPATH:
     - .

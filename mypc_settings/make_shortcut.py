@@ -2,56 +2,30 @@ import os
 import sys
 from textwrap import dedent
 
-from lk_utils import call_once
 from lk_utils import dumps
 from lk_utils import fs
-from lk_utils import loads
 from lk_utils import mklink
 from lk_utils import run_cmd_args
 
-from mypc_settings.common import reformat_path
+from mypc_settings import common
 
 
-@call_once()
-def _change_dir_to_likianta_home() -> None:
-    # noinspection PyCompatibility
-    match sys.platform:
-        case 'linux':
-            os.chdir('/home/likianta/Desktop')
-        case 'win32':
-            os.chdir('C:/Likianta')  # TEST
-
-
-def _load_config() -> dict:
-    cfg_dir = fs.xpath('../config/shortcut_map')
-    usr_dir = fs.xpath('../config/shortcut_map/user')
-    match sys.platform:
-        case 'win32':
-            cfg = loads(f'{cfg_dir}/windows_shortcuts.yaml')
-            if fs.exists(x := f'{usr_dir}/windows_shortcuts.yaml'):
-                temp = loads(x)
-                if temp.get('inherit', False):
-                    cfg['map'].update(temp['map'])
-                else:
-                    cfg = temp
-            return cfg
-    raise NotImplementedError
+# os.chdir(common.home)
 
 
 def main() -> None:
     # root = 'shortcut'
-    io_map = _load_config()['map']
-    for i, o in io_map.items():
-        i = reformat_path(i)
+    cfg = common.loads_config(
+        fs.xpath(f'../config/shortcut/shortcut_{sys.platform}.yaml')
+    )
+    for i, o in cfg['map'].items():
         if not fs.exists(i):
-            print(':iv3', f'could not find "{i}"')
+            print(':ivs', f'could not find "{i}"')
             continue
         
         if o == '...':
-            o = 'shortcut/{}'.format(i.rsplit('/', 1)[-1])
-        else:
-            o = reformat_path(o)
-        assert o.startswith('shortcut/')
+            o = '{}/shortcut/{}'.format(common.home, i.rsplit('/', 1)[-1])
+        # assert o.startswith('shortcut/')
         
         print('[red]{}[/] -> [green]{}[/]'.format(i, o), ':ir')
         if fs.exists(o):

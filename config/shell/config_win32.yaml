@@ -1,0 +1,9 @@
+inherit: true
+environment:
+  PATH:
+    - <inherit>
+    - <user_home>/scoop/apps/scoop/current/bin
+    - C:/Windows
+    - C:/Windows/System32
+    - C:/Windows/System32/OpenSSH
+    - C:/Windows/System32/Wbem
