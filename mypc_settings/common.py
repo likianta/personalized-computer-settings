@@ -50,6 +50,14 @@ def reformat_path(
         match item:
             case 'date':
                 return _find_latest_date(_parent)
+            case 'desktop':
+                match sys.platform:
+                    case 'darwin':
+                        return '/Users/Likianta/Desktop'
+                    case 'linux':
+                        return '/home/likianta/Desktop'
+                    case 'win32':
+                        return 'C:/Users/Likianta/Desktop'
             case 'home':
                 match sys.platform:
                     case 'darwin':
@@ -64,6 +72,14 @@ def reformat_path(
                 return timestamp('y')
             case 'ver':
                 return _find_latest_version(_parent)
+            case 'user_home':
+                match sys.platform:
+                    case 'darwin':
+                        return '/Users/Likianta'
+                    case 'linux':
+                        return '/home/likianta'
+                    case 'win32':
+                        return 'C:/Users/Likianta'
         
         if sys.platform == 'win32':
             match item:
@@ -72,8 +88,6 @@ def reformat_path(
                 case 'start_menu':
                     return ('C:/Users/Likianta/AppData/Roaming/Microsoft/'
                             'Windows/Start Menu')
-                case 'user_home':
-                    return 'C:/Users/Likianta'
         
         if custom_replacer and (x := custom_replacer(item)):
             return x
