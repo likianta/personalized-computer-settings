@@ -8,9 +8,11 @@ from mypc_settings import common
 
 @cli.cmd()
 def main(
-    output_file: str = 'C:/Users/Likianta/Documents/WindowsPowerShell/Microsoft'
-                       '.PowerShell_profile.ps1',
-    turn_to_nushell: bool = False,
+    output_file: str =
+    'C:/Users/Likianta/Documents/PowerShell/Microsoft.PowerShell_profile.ps1',
+    enable_ohmyposh: bool = False,
+    enable_starship: bool = False,
+    enter_nushell: bool = False,
 ) -> None:
     cfg = common.loads_config(fs.xpath('../config/shell/config_win32.yaml'))
     output = [
@@ -18,9 +20,6 @@ def main(
         'personalized-computer-settings : mypc_settings/'
         'make_powershell_profile.py',
         '# file was updated at {}'.format(timestamp('y-m-d h:m:s')),
-        '',
-        'oh-my-posh init pwsh --config $env:POSH_THEMES_PATH\\amro.omp.json | '
-        'Invoke-Expression',
         '',
     ]
     
@@ -39,7 +38,15 @@ def main(
         #   https://stackoverflow.com/a/4167071
     output.append('')
     
-    if turn_to_nushell:
+    if enable_ohmyposh:
+        output.append('oh-my-posh init pwsh --config $env:POSH_THEMES_PATH\\'
+                      'amro.omp.json | Invoke-Expression')
+    if enable_starship:
+        # background:
+        #   scoop install starship
+        #   # ^ check its installation log.
+        output.append('Invoke-Expression (&starship init powershell)')
+    if enter_nushell:
         output.append('C:/Likianta/apps/nushell/nu.exe')
     
     dumps(output, output_file, 'plain')
@@ -47,4 +54,6 @@ def main(
 
 if __name__ == '__main__':
     # pox mypc_settings/make_powershell_profile.py
+    # pox mypc_settings/make_powershell_profile.py --enable-ohmyposh
+    # pox mypc_settings/make_powershell_profile.py --enable-starship
     cli.run(main)

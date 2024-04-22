@@ -42,12 +42,16 @@ def loads_config(file: str) -> dict:
                     node[k] = temp
                 else:
                     continue
+            for k, v in base.items():
+                if k not in node:
+                    node[k] = v
         
         inplace_nodes(user_config, base_config)
         data = user_config
     else:
         data = loads(file)
-        
+    # TODO: sort all entries in 'data'
+    
     if 'map' in data:
         data['map'] = {
             reformat_path(k): reformat_path(v)
@@ -128,6 +132,8 @@ def reformat_path(
             match item:
                 case 'appdata':
                     return 'C:/Users/Likianta/AppData'
+                case 'scoop':
+                    return 'C:/Users/Likianta/scoop'
                 case 'start_menu':
                     return ('C:/Users/Likianta/AppData/Roaming/Microsoft/'
                             'Windows/Start Menu')

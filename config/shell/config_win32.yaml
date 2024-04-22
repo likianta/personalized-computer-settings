@@ -2,7 +2,8 @@ inherit: true
 environment:
   PATH:
     - <inherit>
-    - <user_home>/scoop/apps/scoop/current/bin
+    - <scoop>/apps/scoop/current/bin
+    - <scoop>/apps/starship/current
     - C:/Windows
     - C:/Windows/System32
     - C:/Windows/System32/OpenSSH
