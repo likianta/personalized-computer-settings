@@ -9,6 +9,7 @@ from lk_utils import timestamp
 
 def loads_config(path: str) -> dict:
     data = loads(path)
+    # TODO: sort and deduplicate
     data['alias'] = reformat_aliases(data['alias'])
     data['environment'] = {
         k: map(reformat_path, ((v,) if isinstance(v, str) else v))
@@ -93,4 +94,18 @@ def _find_latest_date(dir: str) -> str:
 
 
 def _find_latest_version(dir: str) -> str:
-    return fs.find_dir_names(dir)[-1]  # TODO
+    ver_pattern = re.compile(r'[0-9][.0-9]+')
+    vers = []
+    for d in fs.find_dirs(dir):
+        if m := ver_pattern.fullmatch(d.name):
+            vers.append(m.group())
+    match len(vers):
+        case 0:
+            raise Exception(
+                'no subfolder contains version info under this dir', dir
+            )
+        case 1:
+            return vers[0]
+        case _:
+            vers.sort(key=lambda x: tuple(map(int, x.split('.'))))
+            return vers[-1]
