@@ -3,7 +3,18 @@ import sys
 import typing as t
 
 from lk_utils import fs
+from lk_utils import loads
 from lk_utils import timestamp
+
+
+def loads_config(path: str) -> dict:
+    data = loads(path)
+    data['alias'] = reformat_aliases(data['alias'])
+    data['environment'] = {
+        k: map(reformat_path, ((v,) if isinstance(v, str) else v))
+        for k, v in data['environment'].items()
+    }
+    return data
 
 
 def print_conversion(*args: str) -> None:
@@ -11,6 +22,16 @@ def print_conversion(*args: str) -> None:
     print('{}[red]{}[/] -> [green]{}[/]'.format(
         title and title + ': ', old, new
     ), ':i2pr')
+
+
+def reformat_aliases(aliases: dict) -> dict:
+    def _extend_replace(item: str) -> str:
+        return out[item]
+    
+    out = {}
+    for k, v in aliases.items():
+        out[k] = reformat_path(v, custom_replacer=_extend_replace)
+    return out
 
 
 def reformat_path(
