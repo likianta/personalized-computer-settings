@@ -1,3 +1,4 @@
+import os
 import re
 import sys
 import typing as t
@@ -6,53 +7,18 @@ from lk_utils import fs
 from lk_utils import loads
 from lk_utils import timestamp
 
-home = (
-    '/Users/Likianta/Desktop' if sys.platform == 'darwin' else
-    '/home/likianta/Desktop' if sys.platform == 'linux' else
-    'C:/Likianta'  # win32
-)
+if x := os.getenv('LIKIANTA_HOME'):
+    home = x
+else:
+    home = (
+        '/Users/Likianta/Desktop' if sys.platform == 'darwin' else
+        '/home/likianta/Desktop' if sys.platform == 'linux' else
+        'C:/Likianta'  # win32
+    )
 
 
 def loads_config(file: str) -> dict:
-    if '_' in fs.basename(file):
-        a, b, c = fs.split(file, 3)
-        base_config_file = '{}/{}.{}'.format(a, b.split('_')[0], c)
-        base_config = loads(base_config_file)
-        user_config = loads(file)
-        
-        def inplace_nodes(node: dict, base: dict) -> None:
-            # no_inherit_case_in_leftovers = False
-            for k, v in tuple(node.items()):
-                if k == '<inherit>':
-                    node.update(base)
-                    # no_inherit_case_in_leftovers = True
-                    continue
-                if isinstance(v, dict):
-                    assert isinstance(base[k], dict)
-                    inplace_nodes(v, base[k])
-                elif isinstance(v, list):
-                    temp = []
-                    for x in v:
-                        assert isinstance(x, str)
-                        if x == '<inherit>':
-                            assert isinstance(base[k], list)
-                            temp.extend(base[k])
-                        else:
-                            temp.append(x)
-                    node[k] = temp
-                else:
-                    continue
-        
-        inplace_nodes(user_config, base_config)
-        data = user_config
-    else:
-        data = loads(file)
-        
-    if 'map' in data:
-        data['map'] = {
-            reformat_path(k): reformat_path(v)
-            for k, v in data['map'].items()
-        }
+    data = _loads_config(file)
     if 'alias' in data:
         # TODO: sort and deduplicate
         data['alias'] = reformat_aliases(data['alias'])
@@ -61,7 +27,64 @@ def loads_config(file: str) -> dict:
             k: map(reformat_path, ((v,) if isinstance(v, str) else v))
             for k, v in data['environment'].items()
         }
-        
+    if 'map' in data:
+        data['map'] = {
+            reformat_path(k): reformat_path(v)
+            for k, v in data['map'].items()
+        }
+    return data
+
+
+def _loads_config(file: str) -> dict:
+    data = loads(file)
+    if 'inherit' not in data:
+        return data
+    
+    # resolve inheritance
+    x = data.pop('inherit')
+    assert x is True or isinstance(x, str)
+    #   `x` is either True or a string of path.
+    #   if it is True, will guess its base config from its file name.
+    #   if it a path string, will find the filename in the same dir.
+    if x is True:
+        a, b, c = fs.split(file, 3)
+        assert '_' in b
+        parent_file = '{}/{}.{}'.format(a, b.rsplit('_', 1)[0], c)
+    else:
+        assert x != fs.basename(file)
+        parent_file = '{}/{}'.format(fs.parent(file), x)
+    assert fs.exists(parent_file)
+    base = _loads_config(parent_file)
+    # print(base, ':vl')
+    
+    def inplace_nodes(node: dict, base: dict) -> dict:
+        for k, v in tuple(node.items()):
+            # print(k, type(v), ':v')
+            if k == '<inherit>':
+                node.update(base)
+                continue
+            if isinstance(v, dict):
+                assert isinstance(base[k], dict)
+                inplace_nodes(v, base[k])
+            elif isinstance(v, list):
+                temp = []
+                for x in v:
+                    assert isinstance(x, str)
+                    if x == '<inherit>':
+                        # print(k, v, base[k], ':vl')
+                        assert isinstance(base[k], list)
+                        temp.extend(base[k])
+                    else:
+                        temp.append(x)
+                node[k] = temp
+            else:
+                continue
+        for k, v in base.items():
+            if k not in node:
+                node[k] = v
+        return node
+    
+    data = inplace_nodes(data, base)
     return data
 
 

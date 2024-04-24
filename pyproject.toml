@@ -9,7 +9,7 @@ packages = [{ include = "mypc_settings" }]
 [tool.poetry.dependencies]
 python = "^3.11"
 argsense = "^0.5.7"
-lk-utils = "^2.9.4"
+lk-utils = "^2.9.5"
 
 [[tool.poetry.source]]
 name = "tsinghua"
