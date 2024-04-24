@@ -1,3 +1,4 @@
 /.idea/
+/config/*/*_user.yaml
 /_temp.vbs
 __pycache__/

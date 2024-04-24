@@ -10,21 +10,14 @@ from mypc_settings import common
 
 @cli.cmd()
 def main(
-    output_file: str = None,
+    output_file: str =
+    '{}/documents/appdata/nushell/likianta-profile.nu'.format(common.home),
     no_welcom_message: bool = False,
+    config_file: str = fs.xpath(f'../config/shell/config_{sys.platform}.yaml'),
 ) -> None:
-    cfg = common.loads_config(
-        fs.xpath(f'../config/shell/config_{sys.platform}.yaml')
-    )
-    # iswin = os.name == 'nt'
-    # home = 'C:/Likianta' if iswin else '/Users/Likianta/Desktop'
+    cfg = common.loads_config(fs.abspath(config_file))
     platform = sys.platform  # 'darwin', 'linux', 'win32'
     assert platform in ('darwin', 'linux', 'win32')
-    home = (
-        '/Users/Likianta/Desktop' if platform == 'darwin' else
-        '/home/likianta/Desktop' if platform == 'linux' else
-        'C:/Likianta'  # win32
-    )
     
     output = [
         '# this file is auto generated/updated by {}'.format(
@@ -37,7 +30,7 @@ def main(
         # do not show timestamp on right prompt in windows, because it may be -
         # chinese sans-serif font which looks not good.
         '$env.PROMPT_COMMAND_RIGHT = ""' if platform == 'win32' else '',
-        '$env.LIKIANTA_HOME = "{}"'.format(home),
+        '$env.LIKIANTA_HOME = "{}"'.format(common.home),
         '',
     ]
     
@@ -57,8 +50,6 @@ def main(
         output.append('alias {} = {}'.format(key, val))
     output.append('')
     
-    output_file = output_file or \
-                  home + '/documents/appdata/nushell/likianta-profile.nu'
     dumps(output, output_file, 'plain')
     print(f'file is saved to "{output_file}"')
 
