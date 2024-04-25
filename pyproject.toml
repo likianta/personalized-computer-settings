@@ -9,7 +9,8 @@ packages = [{ include = "mypc_settings" }]
 [tool.poetry.dependencies]
 python = "^3.11"
 argsense = "^0.5.7"
-lk-utils = "^2.9.4"
+ipython = "^8.23.0"
+lk-utils = "^2.9.5"
 
 [[tool.poetry.source]]
 name = "tsinghua"
@@ -17,7 +18,7 @@ url = "https://pypi.tuna.tsinghua.edu.cn/simple/"
 priority = "primary"
 
 [[tool.poetry.source]]
-name = "likianta-hosted"
+name = "likianta-host"
 url = "http://likianta.pro:2006/"
 priority = "supplemental"
 
