@@ -1,4 +1,4 @@
-inherit: true
+inherit: config.yaml
 environment:
   PATH:
     - <inherit>
@@ -7,3 +7,4 @@ environment:
     - C:/Windows/System32
     - C:/Windows/System32/OpenSSH
     - C:/Windows/System32/Wbem
+    - C:/Windows/System32/WindowsPowerShell/v1.0

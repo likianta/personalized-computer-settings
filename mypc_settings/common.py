@@ -58,14 +58,16 @@ def _loads_config(file: str) -> dict:
     # print(base, ':vl')
     
     def inplace_nodes(node: dict, base: dict) -> dict:
+        updated_node = {}
         for k, v in tuple(node.items()):
             # print(k, type(v), ':v')
             if k == '<inherit>':
-                node.update(base)
+                assert v is True
+                updated_node.update(base)
                 continue
             if isinstance(v, dict):
                 assert isinstance(base[k], dict)
-                inplace_nodes(v, base[k])
+                updated_node[k] = inplace_nodes(v, base[k])
             elif isinstance(v, list):
                 temp = []
                 for x in v:
@@ -76,13 +78,13 @@ def _loads_config(file: str) -> dict:
                         temp.extend(base[k])
                     else:
                         temp.append(x)
-                node[k] = temp
+                updated_node[k] = temp
             else:
-                continue
+                updated_node[k] = v
         for k, v in base.items():
             if k not in node:
-                node[k] = v
-        return node
+                updated_node[k] = v
+        return updated_node
     
     data = inplace_nodes(data, base)
     return data

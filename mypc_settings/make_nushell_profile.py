@@ -85,6 +85,8 @@ def main(
 
 if __name__ == '__main__':
     # pox mypc_settings/make_nushell_profile.py
+    # pox mypc_settings/make_nushell_profile.py --config-file
+    #   config/shell/config_win32_user.yaml
     # pox mypc_settings/make_nushell_profile.py <custom_file>
     # pox mypc_settings/make_nushell_profile.py --enable-starship
     cli.run(main)
