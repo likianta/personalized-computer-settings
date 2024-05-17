@@ -1,4 +1,4 @@
-inherit: true
+inherit: map.yaml
 home: C:/Likianta
 map:
   <inherit>: ...

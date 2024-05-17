@@ -2,6 +2,7 @@ import os
 import sys
 from textwrap import dedent
 
+from argsense import cli
 from lk_utils import dumps
 from lk_utils import fs
 from lk_utils import mklink
@@ -10,14 +11,13 @@ from lk_utils import run_cmd_args
 from mypc_settings import common
 
 
-# os.chdir(common.home)
-
-
-def main() -> None:
+@cli.cmd()
+def main(
+    config_file: str =
+    fs.xpath(f'../config/shortcut/map_{sys.platform}.yaml'),
+) -> None:
     # root = 'shortcut'
-    cfg = common.loads_config(
-        fs.xpath(f'../config/shortcut/shortcut_{sys.platform}.yaml')
-    )
+    cfg = common.loads_config(config_file)
     for i, o in cfg['map'].items():
         if not fs.exists(i):
             print(':ivs', f'could not find "{i}"')
@@ -75,4 +75,5 @@ def make_shortcut_win32(file_i: str, file_o: str = None) -> None:
 
 if __name__ == '__main__':
     # pox mypc_settings/make_shortcut.py
-    main()
+    # pox mypc_settings/make_shortcut.py config/shortcut/map_win32_user.yaml
+    cli.run(main)

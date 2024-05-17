@@ -1,4 +1,4 @@
-inherit: true
+inherit: map.yaml
 environment:
   PATH:
     - <home>/apps/alist

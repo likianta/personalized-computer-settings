@@ -1,4 +1,4 @@
-inherit: config.yaml
+inherit: map.yaml
 environment:
   NODE_PATH: <home>/apps/nodejs/global_modules/node_modules
   PATH:

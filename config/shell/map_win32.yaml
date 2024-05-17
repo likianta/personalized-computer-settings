@@ -1,4 +1,4 @@
-inherit: config.yaml
+inherit: map.yaml
 environment:
   PATH:
     - <inherit>

@@ -62,7 +62,7 @@ def _loads_config(file: str) -> dict:
         for k, v in tuple(node.items()):
             # print(k, type(v), ':v')
             if k == '<inherit>':
-                assert v is True
+                assert v is True or v == '...'
                 updated_node.update(base)
                 continue
             if isinstance(v, dict):

@@ -14,7 +14,7 @@ from mypc_settings import common
 def main(
     output_file: str =
     '{}/documents/appdata/nushell/likianta-profile.nu'.format(common.home),
-    config_file: str = fs.xpath(f'../config/shell/config_{sys.platform}.yaml'),
+    config_file: str = fs.xpath(f'../config/shell/map_{sys.platform}.yaml'),
     enable_starship: bool = False,
     hide_welcome_message: t.Optional[bool] = None,
 ) -> None:
@@ -86,7 +86,7 @@ def main(
 if __name__ == '__main__':
     # pox mypc_settings/make_nushell_profile.py
     # pox mypc_settings/make_nushell_profile.py --config-file
-    #   config/shell/config_win32_user.yaml
+    #   config/shell/map_win32_user.yaml
     # pox mypc_settings/make_nushell_profile.py <custom_file>
     # pox mypc_settings/make_nushell_profile.py --enable-starship
     cli.run(main)

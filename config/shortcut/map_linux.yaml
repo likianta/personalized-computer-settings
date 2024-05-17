@@ -1,4 +1,4 @@
-inherit: true
+inherit: map.yaml
 home: /home/likianta/Desktop
 map:
   <home>/pictures/Inbox: <shortcut>/pictures-inbox
