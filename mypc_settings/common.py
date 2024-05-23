@@ -19,6 +19,10 @@ else:
 
 def loads_config(file: str) -> dict:
     data = _loads_config(file)
+    if 'home' in data:
+        global home
+        home = data['home']
+        print(f'reset `home` to "{home}"', ':v2')
     if 'alias' in data:
         # TODO: sort and deduplicate
         data['alias'] = reformat_aliases(data['alias'])
