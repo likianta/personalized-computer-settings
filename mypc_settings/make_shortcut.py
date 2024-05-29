@@ -68,7 +68,7 @@ def make_shortcut_win32(file_i: str, file_o: str = None) -> None:
         file_i=fs.abspath(file_i).replace('/', '\\'),
         file_o=fs.abspath(file_o).replace('/', '\\'),
     )
-    dumps(command, vbs, ftype='plain')
+    dumps(command, vbs, 'plain')
     
     run_cmd_args('cscript', '/nologo', vbs)
 

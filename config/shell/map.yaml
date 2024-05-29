@@ -9,12 +9,15 @@ alias:
   pou: <po> update
   pox: <po> run python
   st: <por> streamlit
-  strun: <por> streamlit run --server.headless true --server.port
+  strun: <por> streamlit run --browser.gatherUsageStats false --server.headless true --server.port
 environment:
   NODE_PATH: <home>/apps/nodejs/global_modules/node_modules
   PATH:
-    - <home>/apps/git/cmd
+    - <home>/apps/alist
+    - <home>/apps/dufs
+    - <home>/apps/git/bin
     - <home>/apps/jetbrains-toolbox/scripts
+    - <home>/apps/nodejs/22.0
     - <home>/apps/nushell
     - <home>/apps/python/3.12
     - <home>/apps/python/3.12/scripts
@@ -24,3 +27,4 @@ environment:
     - .
     - src
     - lib
+  PYTHONUTF8: 1
