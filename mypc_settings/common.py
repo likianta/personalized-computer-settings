@@ -28,7 +28,11 @@ def loads_config(file: str) -> dict:
         data['alias'] = reformat_aliases(data['alias'])
     if 'environment' in data:
         data['environment'] = {
-            k: map(reformat_path, ((v,) if isinstance(v, str) else v))
+            k: map(reformat_path, (
+                (v,) if isinstance(v, str) else
+                (str(v),) if isinstance(v, int) else
+                v  # list
+            ))
             for k, v in data['environment'].items()
         }
     if 'map' in data:
