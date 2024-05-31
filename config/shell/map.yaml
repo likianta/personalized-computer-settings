@@ -1,4 +1,6 @@
 alias:
+  node: <home>/apps/nodejs/22.2/node
+  npm: <home>/apps/nodejs/22.2/npm
   pc: <home>/apps/jetbrains-toolbox/scripts/pycharm
   py: <home>/apps/python/3.12/python.exe
   pip: <py> -m pip
@@ -11,13 +13,16 @@ alias:
   st: <por> streamlit
   strun: <por> streamlit run --browser.gatherUsageStats false --server.headless true --server.port
 environment:
-  NODE_PATH: <home>/apps/nodejs/global_modules/node_modules
+  HTTP_PROXY: http://127.0.0.1:7890
+  HTTPS_PROXY: http://127.0.0.1:7890
+  NODE_PATH: <home>/apps/nodejs/global/modules
   PATH:
     - <home>/apps/alist
     - <home>/apps/dufs
     - <home>/apps/git/bin
+    - <home>/apps/java/jdk-22.0/bin
     - <home>/apps/jetbrains-toolbox/scripts
-    - <home>/apps/nodejs/22.0
+    - <home>/apps/nodejs/22.2
     - <home>/apps/nushell
     - <home>/apps/python/3.12
     - <home>/apps/python/3.12/scripts
