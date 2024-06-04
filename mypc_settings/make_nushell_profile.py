@@ -15,9 +15,17 @@ def main(
     output_file: str =
     '{}/documents/appdata/nushell/likianta-profile.nu'.format(common.home),
     config_file: str = fs.xpath(f'../config/shell/map_{sys.platform}.yaml'),
+    environment_settings_scheme: str = 'nushell',
     enable_starship: bool = False,
     hide_welcome_message: t.Optional[bool] = None,
 ) -> None:
+    """
+    kwargs:
+        environment_settings_scheme (-e): 'nushell', 'windows', 'ignore'
+            'nushell': output environment settings to `output_file`.
+            'windows': set environment variables in windows.
+            'ignore': do nothing.
+    """
     cfg = common.loads_config(fs.abspath(config_file))
     platform = sys.platform  # 'darwin', 'linux', 'win32'
     assert platform in ('darwin', 'linux', 'win32')
@@ -34,14 +42,22 @@ def main(
     ]
     
     # env vars
-    for key, val in cfg['environment'].items():
-        if key == 'PATH':
-            output.append('$env.{} = [\n    {}\n]'.format(
-                key, join((f'"{x}",' for x in val), 4)
-            ))
-        else:
-            output.append('$env.{} = "{}"'.format(key, ';'.join(val)))
-    output.append('')
+    match environment_settings_scheme:
+        case 'ignore':
+            print('ignore environment settings', ':vs')
+        case 'nushell':
+            for key, val in cfg['environment'].items():
+                if key == 'PATH':
+                    output.append('$env.{} = [\n    {}\n]'.format(
+                        key, join((f'"{x}",' for x in val), 4)
+                    ))
+                else:
+                    output.append('$env.{} = "{}"'.format(key, ';'.join(val)))
+            output.append('')
+        case 'windows':
+            assert platform == 'win32'
+            from mypc_settings import make_windows_user_environment_variables
+            make_windows_user_environment_variables.main(config_file)
     
     # alias
     for key, val in cfg['alias'].items():
@@ -86,7 +102,5 @@ def main(
 if __name__ == '__main__':
     # pox mypc_settings/make_nushell_profile.py
     # pox mypc_settings/make_nushell_profile.py --config-file
-    #   config/shell/map_win32_user.yaml
-    # pox mypc_settings/make_nushell_profile.py <custom_file>
-    # pox mypc_settings/make_nushell_profile.py --enable-starship
+    #   config/shell/map_win32_user.yaml -e ignore
     cli.run(main)
