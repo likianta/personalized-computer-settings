@@ -13,8 +13,7 @@ environment:
     - <home>/apps/nodejs/global_modules
     - <home>/apps/nodejs/pnpm
     - <home>/apps/nushell
-    - <home>/apps/python/3.12
-    - <home>/apps/python/3.12/scripts
+    - <home>/apps/python/3.12/bin
     - <home>/apps/vscode/bin
     - /Users/Likianta/.bun/bin
     - /Users/Likianta/.cargo/bin

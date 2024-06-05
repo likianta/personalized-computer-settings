@@ -2,6 +2,8 @@ inherit: map.yaml
 environment:
   PATH:
     - <inherit>
+    - <home>/apps/python/3.12
+    - <home>/apps/python/3.12/Scripts
     - <user_home>/scoop/shims
     - C:/Windows
     - C:/Windows/System32

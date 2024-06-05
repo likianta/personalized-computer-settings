@@ -1,6 +1,4 @@
 alias:
-  node: <home>/apps/nodejs/22.2/node
-  npm: <home>/apps/nodejs/22.2/npm
   pc: <home>/apps/jetbrains-toolbox/scripts/pycharm
   py: <home>/apps/python/3.12/python.exe
   pip: <py> -m pip
@@ -15,7 +13,6 @@ alias:
 environment:
   HTTP_PROXY: http://127.0.0.1:7890
   HTTPS_PROXY: http://127.0.0.1:7890
-  NODE_PATH: <home>/apps/nodejs/global/modules
   PATH:
     - <home>/apps/alist
     - <home>/apps/dufs
@@ -24,10 +21,7 @@ environment:
     - <home>/apps/jetbrains-toolbox/scripts
     - <home>/apps/nodejs/22.2
     - <home>/apps/nushell
-    - <home>/apps/python/3.12
-    - <home>/apps/python/3.12/scripts
     - <home>/apps/vscode/bin
-  PNPM_HOME: <home>/apps/nodejs/pnpm
   PYTHONPATH:
     - .
     - src
