@@ -1,0 +1,6 @@
+workspace_root: <home>/workspace
+symlinks:
+  <home>/workspace/likianta.master.dev/argsense-cli/dist: argsense
+  <home>/workspace/likianta.master.dev/lk-logger/dist: lk-logger
+  <home>/workspace/likianta.master.dev/lk-utils/dist: lk-utils
+  <home>/workspace/likianta.master.dev/pyportable-crypto/dist: pyportable-crypto
