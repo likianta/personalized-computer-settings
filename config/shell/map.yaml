@@ -5,6 +5,7 @@ alias:
   po: <py> -m poetry
   pob: <po> build -f wheel
   poe: <po> env info
+  poi: <po> install --no-root
   por: <po> run
   pou: <po> update
   pox: <po> run python

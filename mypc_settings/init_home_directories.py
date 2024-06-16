@@ -25,6 +25,7 @@ def main(root: str) -> None:
         apps/steam
         apps/wechat
         backups
+        backups/android-apps
         backups/fonts
         backups/software-packages
         backups/software-settings
@@ -51,6 +52,7 @@ def main(root: str) -> None:
         temp
         temp/archived
         workspace
+        workspace/archive
         workspace/dev-dist
         workspace/likianta.founder.pro
         workspace/likianta.jlsemi.com
