@@ -103,4 +103,6 @@ if __name__ == '__main__':
     # pox mypc_settings/make_nushell_profile.py
     # pox mypc_settings/make_nushell_profile.py --config-file
     #   config/shell/map_win32_user.yaml -e windows
+    # pox mypc_settings/make_nushell_profile.py --config-file
+    #   config/shell/map_win32_user.yaml -e ignore
     cli.run(main)

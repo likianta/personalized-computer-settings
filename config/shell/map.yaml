@@ -16,6 +16,7 @@ environment:
   HTTPS_PROXY: http://127.0.0.1:7890
   PATH:
     - <home>/apps/alist
+    - <home>/apps/bore
     - <home>/apps/dufs
     - <home>/apps/git/bin
     - <home>/apps/java/jdk-22.0/bin
