@@ -1,5 +1,6 @@
 /.idea/
 /config/*/*_user.yaml
+/config/keymap.ahk
 /links/
 /_temp.vbs
 __pycache__/
