@@ -162,35 +162,38 @@ reference = "tsinghua"
 
 [[package]]
 name = "lk-logger"
-version = "5.7.6"
-description = "Python print with source and varnames."
+version = "6.0.0a19"
+description = "Python print with source map and varnames."
 optional = false
 python-versions = ">=3.8,<4.0"
 files = [
-    {file = "lk_logger-5.7.6-py3-none-any.whl", hash = "sha256:47147af796e1dae1ecbfe4023a23a5d6342dfe913e3d2880809e0059d81c5aae"},
+    {file = "lk_logger-6.0.0a19-py3-none-any.whl", hash = "sha256:376aad11a5346a0fd4b72d735203dbb6e8940252e5d5db3c70a5d3f153702b7c"},
 ]
 
 [package.dependencies]
-rich = ">=13.0,<14.0"
+rich = ">=13.8,<14.0"
+
+[package.extras]
+svg = ["svg-ultralight"]
 
 [package.source]
 type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
+url = "http://likianta.pro:2131"
+reference = "likianta-host"
 
 [[package]]
 name = "lk-utils"
-version = "2.10.7"
+version = "2.11.0b0"
 description = "LK Utils is a set of utility wrappers made for data processing."
 optional = false
 python-versions = ">=3.8,<4.0"
 files = [
-    {file = "lk_utils-2.10.7-py3-none-any.whl", hash = "sha256:fb2a6ec0a25495e8b7f6851ba96c13e0e3436887416777d0e5a81c5d9d941733"},
+    {file = "lk_utils-2.11.0b0-py3-none-any.whl", hash = "sha256:862cfdc7adb827baf6e4ea04dd87152c5c903ebce4795b7672e3953e3916a700"},
 ]
 
 [package.dependencies]
 argsense = ">=0.5.8,<0.6.0"
-lk-logger = ">=5.7.6,<6.0.0"
+lk-logger = ">=6.0.0a19,<7.0.0"
 psutil = ">=6.0.0,<7.0.0"
 pyyaml = ">=6.0.0,<7.0.0"
 rich = ">=13.0.0,<14.0.0"
@@ -198,8 +201,8 @@ typing-extensions = ">=4.0.0,<5.0.0"
 
 [package.source]
 type = "legacy"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-reference = "tsinghua"
+url = "http://likianta.pro:2131"
+reference = "likianta-host"
 
 [[package]]
 name = "markdown-it-py"
@@ -479,13 +482,13 @@ reference = "tsinghua"
 
 [[package]]
 name = "rich"
-version = "13.7.1"
+version = "13.8.1"
 description = "Render rich text, tables, progress bars, syntax highlighting, markdown and more to the terminal"
 optional = false
 python-versions = ">=3.7.0"
 files = [
-    {file = "rich-13.7.1-py3-none-any.whl", hash = "sha256:4edbae314f59eb482f54e9e30bf00d33350aaa94f4bfcd4e9e3110e64d0d7222"},
-    {file = "rich-13.7.1.tar.gz", hash = "sha256:9be308cb1fe2f1f57d67ce99e95af38a1e2bc71ad9813b0e247cf7ffbcc3a432"},
+    {file = "rich-13.8.1-py3-none-any.whl", hash = "sha256:1760a3c0848469b97b558fc61c85233e3dafb69c7a071b4d60c38099d3cd4c06"},
+    {file = "rich-13.8.1.tar.gz", hash = "sha256:8260cda28e3db6bf04d2d1ef4dbc03ba80a824c88b0e7668a0f23126a424844a"},
 ]
 
 [package.dependencies]
@@ -595,4 +598,4 @@ reference = "tsinghua"
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "20e00edf18481bd4ba3aaa17c59e07aa4ffe8b29ddb1f5ceec686b0a595c6633"
+content-hash = "153633f89b707cfc16012863b91894fafb7ffef6251db41426d29fe703195a5f"

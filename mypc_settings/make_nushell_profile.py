@@ -2,19 +2,18 @@ import sys
 import typing as t
 
 from argsense import cli
-from lk_utils import dumps
 from lk_utils import fs
 from lk_utils import timestamp
 from lk_utils.textwrap import join
 
-from mypc_settings import common
+from mypc_settings import load_config
+from mypc_settings import reformat_path
 
 
 @cli.cmd()
 def main(
-    output_file: str =
-    '{}/documents/appdata/nushell/likianta-profile.nu'.format(common.home),
-    config_file: str = fs.xpath(f'../config/shell/map_{sys.platform}.yaml'),
+    config_file: str = 'config/default.yaml',
+    output_file: str = '<home>/documents/appdata/nushell/likianta-profile.nu',
     environment_settings_scheme: str = 'nushell',
     enable_starship: bool = False,
     hide_welcome_message: t.Optional[bool] = None,
@@ -26,7 +25,8 @@ def main(
             'windows': set environment variables in windows.
             'ignore': do nothing.
     """
-    cfg = common.loads_config(fs.abspath(config_file))
+    cfg = load_config(fs.abspath(config_file))
+    output_file = reformat_path(output_file)
     platform = sys.platform  # 'darwin', 'linux', 'win32'
     assert platform in ('darwin', 'linux', 'win32')
     
@@ -37,7 +37,7 @@ def main(
         ),
         '# file was updated at {}'.format(timestamp('y-m-d h:m:s')),
         '',
-        '$env.LIKIANTA_HOME = "{}"'.format(common.home),
+        '$env.LIKIANTA_HOME = "{}"'.format(cfg['home']),
         '',
     ]
     
@@ -61,14 +61,14 @@ def main(
     
     # alias
     for key, val in cfg['alias'].items():
-        common.print_conversion(key, val)
+        print(f'{key} -> {val}', ':r2')
         output.append('alias {} = {}'.format(key, val))
     output.append('')
     
     if enable_starship:
         # https://starship.rs/guide/#step-2-set-up-your-shell-to-use-starship
         if not fs.exists(
-            x := f'{common.home}/documents/appdata/nushell/starship-init.nu'
+            x := f'{cfg["home"]}/documents/appdata/nushell/starship-init.nu'
         ):
             print('''
                 "starship-init.nu" is not created. use the following command -
@@ -95,7 +95,7 @@ def main(
                 2. set it to `false`
         ''')
     
-    dumps(output, output_file, 'plain')
+    fs.dump(output, output_file, 'plain')
     print(f'file is saved to "{output_file}"')
 
 

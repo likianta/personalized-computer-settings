@@ -3,37 +3,34 @@ import sys
 from textwrap import dedent
 
 from argsense import cli
-from lk_utils import dumps
 from lk_utils import fs
-from lk_utils import mklink
 from lk_utils import run_cmd_args
 
-from mypc_settings import common
+from mypc_settings import load_config
 
 
 @cli.cmd()
 def main(
-    config_file: str =
-    fs.xpath(f'../config/shortcut/map_{sys.platform}.yaml'),
+    config_file: str = 'config/default.yaml',
+    overwrite: bool = False
 ) -> None:
-    # root = 'shortcut'
-    cfg = common.loads_config(config_file)
-    for i, o in cfg['map'].items():
-        if not fs.exists(i):
-            print(':ivs', f'could not find "{i}"')
-            continue
-        
-        if o == '...':
-            o = '{}/shortcut/{}'.format(common.home, i.rsplit('/', 1)[-1])
-        # assert o.startswith('shortcut/')
-        
-        print('[red]{}[/] -> [green]{}[/]'.format(i, o), ':ir')
-        if fs.exists(o):
-            continue
-        if sys.platform == 'win32':
-            make_shortcut_win32(i, o + '.lnk')
+    cfg = load_config(config_file)
+    for i, o in cfg['shortcut'].items():
+        if fs.exists(i):
+            print('{} -> {}'.format(
+                fs.relpath(i, cfg['home']), fs.relpath(o, cfg['home'])
+            ), ':r2')
+            if fs.exists(o):
+                if overwrite:
+                    fs.remove(o)
+                else:
+                    continue
+            if sys.platform == 'win32':
+                make_shortcut_win32(i, o + '.lnk')
+            else:
+                fs.make_link(i, o)
         else:
-            mklink(i, o)
+            print(':ivs', f'could not find "{i}"')
 
 
 def make_shortcut_win32(file_i: str, file_o: str = None) -> None:
@@ -68,12 +65,12 @@ def make_shortcut_win32(file_i: str, file_o: str = None) -> None:
         file_i=fs.abspath(file_i).replace('/', '\\'),
         file_o=fs.abspath(file_o).replace('/', '\\'),
     )
-    dumps(command, vbs, 'plain')
+    fs.dump(command, vbs, 'plain')
     
     run_cmd_args('cscript', '/nologo', vbs)
 
 
 if __name__ == '__main__':
     # pox mypc_settings/make_shortcut.py
-    # pox mypc_settings/make_shortcut.py config/shortcut/map_win32_user.yaml
+    # pox mypc_settings/make_shortcut.py config/user.yaml
     cli.run(main)

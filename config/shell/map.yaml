@@ -10,7 +10,7 @@ alias:
   pou: <po> update
   pox: <po> run python
   st: <por> streamlit
-  strun: <por> streamlit run --browser.gatherUsageStats false --server.headless true --server.port
+  strun: <por> streamlit run --browser.gatherUsageStats false --runner.magicEnabled false --server.headless true --server.port
 environment:
   HTTP_PROXY: http://127.0.0.1:7890
   HTTPS_PROXY: http://127.0.0.1:7890

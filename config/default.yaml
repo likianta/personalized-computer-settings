@@ -1,0 +1,50 @@
+home: C:/Likianta
+alias:
+  pc: <home>/apps/jetbrains-toolbox/scripts/pycharm
+  py: <home>/apps/python/3.12/python.exe
+  pip: <py> -m pip
+  po: <py> -m poetry
+  pob: <po> build -f wheel
+  poe: <po> env info
+  poi: <po> install --no-root
+  por: <po> run
+  pou: <po> update
+  pox: <po> run python
+  strun: <por> streamlit run --browser.gatherUsageStats false --runner.magicEnabled false --server.headless true --server.port
+environment:
+  HTTP_PROXY: http://127.0.0.1:7890
+  HTTPS_PROXY: http://127.0.0.1:7890
+  PATH:
+    - <home>/apps/alist
+    - <home>/apps/bore
+    - <home>/apps/dufs
+    - <home>/apps/git/bin
+    - <home>/apps/java/jdk-22.0/bin
+    - <home>/apps/jetbrains-toolbox/scripts
+    - <home>/apps/nodejs/22.2
+    - <home>/apps/nushell
+    - <home>/apps/vscode/bin
+  PYTHONPATH:
+    - .
+    - src
+    - lib
+  PYTHONUTF8: 1
+shortcut:
+  <home>/applist: <shortcut>/<name_as_is>
+  <home>/apps: <shortcut>/<name_as_is>
+  <home>/apps/python/3.12: <shortcut>/python-3.12
+  <home>/apps/pypoetry/cache/virtualenvs: <shortcut>/pypoetry-env
+  <home>/backups: <shortcut>/<name_as_is>
+  <home>/backups/software-packages: <shortcut>/<name_as_is>
+  <home>/backups/software-settings: <shortcut>/<name_as_is>
+  <home>/documents: <shortcut>/<name_as_is>
+  <home>/documents/appdata: <shortcut>/<name_as_is>
+  <home>/documents/gitbook-ssg/source-docs: <shortcut>/gitbook
+  <home>/downloads: <shortcut>/<name_as_is>
+  <home>/pictures: <shortcut>/<name_as_is>
+  <home>/temp: <shortcut>/<name_as_is>
+  <home>/temp/<yyyy>-<mm>: <shortcut>/temp-(<yyyy>-<mm>)
+  <home>/workspace: <shortcut>/<name_as_is>
+  <home>/workspace/com.jlsemi.likianta: <shortcut>/likianta.jlsemi.com
+  <home>/workspace/dev.master.likianta: <shortcut>/likianta.master.dev
+  <home>/workspace/playground/python-playground: <shortcut>/<name_as_is>
