@@ -1,7 +1,0 @@
-inherit: map.yaml
-home: /home/likianta/Desktop
-map:
-  <home>/pictures/Inbox: <shortcut>/pictures-inbox
-  <home>/pictures/Inbox/{yyyy}: <shortcut>/pictures-inbox-({yyyy})
-  <home>/workspace/com.jlsemi.likianta: <shortcut>/likianta.jlsemi.com
-  <home>/workspace/dev.master.likianta: <shortcut>/likianta.master.dev

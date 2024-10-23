@@ -23,6 +23,8 @@ environment:
     - <home>/apps/jetbrains-toolbox/scripts
     - <home>/apps/nodejs/22.2
     - <home>/apps/nushell
+    - <home>/apps/python/3.12
+    - <home>/apps/scoop/shims
     - <home>/apps/vscode/bin
   PYTHONPATH:
     - .

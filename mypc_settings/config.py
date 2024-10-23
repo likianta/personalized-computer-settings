@@ -5,7 +5,6 @@ import typing as t
 from functools import partial
 
 from lk_utils import fs
-from lk_utils import loads
 from lk_utils import timestamp
 
 home = ...
@@ -50,7 +49,7 @@ def _determine_home_directory(config: dict) -> str:
 
 
 def _load_config(file: str) -> dict:
-    data = loads(file)
+    data = fs.load(file)
     if 'inherit' not in data:
         return data
     
