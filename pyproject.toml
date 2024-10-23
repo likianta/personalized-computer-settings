@@ -10,10 +10,11 @@ packages = [{ include = "mypc_settings" }]
 python = "^3.12"
 argsense = "^0.5.8"
 ipython = "^8.23.0"
-# lk-logger = "^5.7.4"
-# lk-logger = { version = "^5.7.0a0", source = "likianta-host" }
-# lk-utils = "^2.10.7"
-lk-utils = { version = "^2.11.0b0", source = "likianta-host" }
+lk-logger = { version = "^6.0.0a26", source = "likianta-host" }
+lk-utils = { version = "^3.0.0b5", source = "likianta-host" }
+psutil = "*"
+pywin32 = "*"
+streamlit = "^1.39.0"
 
 [[tool.poetry.source]]
 name = "tsinghua"
