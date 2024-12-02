@@ -8,7 +8,7 @@ from mypc_settings import common
 def main(
     config_file: str = fs.xpath('../config/dev_dist/map.yaml'),
 ) -> None:
-    cfg = common.loads_config(config_file)
+    cfg = common.load_config(config_file)
     root = common.reformat_path(cfg['workspace_root'])
     print(root)
     for k, v in cfg['symlinks'].items():

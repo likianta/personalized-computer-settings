@@ -26,6 +26,8 @@ environment:
     - <home>/apps/python/3.12
     - <home>/apps/scoop/shims
     - <home>/apps/vscode/bin
+    # - C:/Program Files/PowerShell/7
+    - C:/Windows/System32/WindowsPowerShell/v1.0
   PYTHONPATH:
     - .
     - src
@@ -47,6 +49,7 @@ shortcut:
   <home>/temp: <shortcut>/<name_as_is>
   <home>/temp/<yyyy>-<mm>: <shortcut>/temp-(<yyyy>-<mm>)
   <home>/workspace: <shortcut>/<name_as_is>
-  <home>/workspace/com.jlsemi.likianta: <shortcut>/likianta.jlsemi.com
-  <home>/workspace/dev.master.likianta: <shortcut>/likianta.master.dev
+  <home>/workspace/com.jlsemi.likianta: <shortcut>/com.jlsemi.likianta
+  <home>/workspace/dev.master.likianta: <shortcut>/dev.master.likianta
   <home>/workspace/playground/python-playground: <shortcut>/<name_as_is>
+  C:/Users/Likianta: <shortcut>/user.home.likianta

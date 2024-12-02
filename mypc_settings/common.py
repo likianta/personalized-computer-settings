@@ -4,7 +4,6 @@ import sys
 import typing as t
 
 from lk_utils import fs
-from lk_utils import loads
 from lk_utils import timestamp
 
 if x := os.getenv('LIKIANTA_HOME'):
@@ -17,8 +16,8 @@ else:
     )
 
 
-def loads_config(file: str) -> dict:
-    data = _loads_config(file)
+def load_config(file: str) -> dict:
+    data = _load_config(file)
     if 'home' in data:
         global home
         home = data['home']
@@ -43,8 +42,8 @@ def loads_config(file: str) -> dict:
     return data
 
 
-def _loads_config(file: str) -> dict:
-    data = loads(file)
+def _load_config(file: str) -> dict:
+    data = fs.load(file)
     if 'inherit' not in data:
         return data
     
@@ -62,7 +61,7 @@ def _loads_config(file: str) -> dict:
         assert x != fs.basename(file)
         parent_file = '{}/{}'.format(fs.parent(file), x)
     assert fs.exists(parent_file)
-    base = _loads_config(parent_file)
+    base = _load_config(parent_file)
     # print(base, ':vl')
     
     def inplace_nodes(node: dict, base: dict) -> dict:
