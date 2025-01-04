@@ -10,19 +10,25 @@ def main(root: str) -> None:
         applist
         apps
         apps/bandizip
+        apps/bore
+        apps/dufs
         apps/jetbrains-toolbox
         apps/jetbrains-toolbox/apps
         apps/jetbrains-toolbox/scripts
         apps/nodejs
         apps/nushell
         apps/pypoetry
+        apps/pypoetry/cache
         apps/python
         apps/python/3.8
+        apps/python/3.9
+        apps/python/3.10
+        apps/python/3.11
         apps/python/3.12
+        apps/python/3.13
         apps/qq
         apps/scoop
         apps/sogou-pinyin
-        apps/steam
         apps/wechat
         backups
         backups/android-apps
@@ -53,10 +59,9 @@ def main(root: str) -> None:
         temp/archived
         workspace
         workspace/archive
+        workspace/com.jlsemi.likianta
+        workspace/dev.master.likianta
         workspace/dev-dist
-        workspace/likianta.founder.pro
-        workspace/likianta.jlsemi.com
-        workspace/likianta.master.dev
         workspace/playground
         workspace/playground/python-playground
     ''').splitlines():

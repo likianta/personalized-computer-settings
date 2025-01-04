@@ -1,7 +1,7 @@
 home: C:/Likianta
 alias:
   pc: <home>/apps/jetbrains-toolbox/scripts/pycharm
-  py: <home>/apps/python/3.12/python.exe
+  py: <home>/apps/python/3.13/python.exe
   pip: <py> -m pip
   po: <py> -m poetry
   pob: <po> build -f wheel
@@ -15,19 +15,21 @@ environment:
   HTTP_PROXY: http://127.0.0.1:7890
   HTTPS_PROXY: http://127.0.0.1:7890
   PATH:
-    - <home>/apps/alist
     - <home>/apps/bore
     - <home>/apps/dufs
     - <home>/apps/git/bin
     - <home>/apps/java/jdk-22.0/bin
     - <home>/apps/jetbrains-toolbox/scripts
-    - <home>/apps/nodejs/22.2
     - <home>/apps/nushell
-    - <home>/apps/python/3.12
+    - <home>/apps/python/3.13
+    - <home>/apps/python/3.13/Scripts
+    - <home>/apps/scoop/apps/flutter/current/bin
+    - <home>/apps/scoop/apps/pnpm/current
     - <home>/apps/scoop/shims
-    - <home>/apps/vscode/bin
+    - <home>/apps/visual-studio-code/bin
     # - C:/Program Files/PowerShell/7
     - C:/Windows/System32/WindowsPowerShell/v1.0
+  PNPM_HOME: <home>/apps/scoop/apps/pnpm/current
   PYTHONPATH:
     - .
     - src
@@ -36,8 +38,10 @@ environment:
 shortcut:
   <home>/applist: <shortcut>/<name_as_is>
   <home>/apps: <shortcut>/<name_as_is>
-  <home>/apps/python/3.12: <shortcut>/python-3.12
+  <home>/apps/python/3.13: <shortcut>/python-3.13
   <home>/apps/pypoetry/cache/virtualenvs: <shortcut>/pypoetry-env
+  <home>/apps/scoop/apps: <shortcut>/scoop-apps
+  <home>/apps/scoop/shims: <shortcut>/scoop-shims
   <home>/backups: <shortcut>/<name_as_is>
   <home>/backups/software-packages: <shortcut>/<name_as_is>
   <home>/backups/software-settings: <shortcut>/<name_as_is>

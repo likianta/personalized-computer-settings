@@ -1,3 +1,9 @@
+"""
+1. call `$nu.config-path` to get the config path.
+2. edit config, add this line to the bottom of lines:
+    source <home>/documents/appdata/nushell/likianta-profile.nu
+3. restart nushell to make effect.
+"""
 import sys
 import typing as t
 
