@@ -8,13 +8,15 @@ packages = [{ include = "mypc_settings" }]
 
 [tool.poetry.dependencies]
 python = "^3.12"
-argsense = "^0.5.8"
+argsense = { version = "^0.6.4a1", source = "likianta-host" }
 ipython = "^8.23.0"
-lk-logger = { version = "^6.0.2", source = "likianta-host" }
-lk-utils = { version = "^3.1.2a1", source = "likianta-host" }
-psutil = "*"
-pywin32 = "*"
-streamlit = "^1.39.0"
+lk-logger = { version = "^6.0.3", source = "likianta-host" }
+lk-utils = { version = "^3.1.3a1", source = "likianta-host" }
+psutil = "^6.1.1"
+pywin32 = "^308"
+streamlit = "^1.41.0"
+
+pyarrow = "^18.1.0"  # <- streamlit
 
 [[tool.poetry.source]]
 name = "tsinghua"

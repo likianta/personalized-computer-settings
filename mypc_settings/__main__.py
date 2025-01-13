@@ -13,8 +13,14 @@ def preview_config(file: str) -> None:
 @cli.cmd()
 def setup(
     file: str = 'config/default.yaml',
-    overwrite_shortcuts: bool = False
+    overwrite_shortcuts: bool = False,
+    clean_shortcuts: bool = False,
 ) -> None:
+    """
+    params:
+        overwrite_shortcuts (-o):
+        clean_shortcuts (-c):
+    """
     # config = load_config(file)
     
     from .make_nushell_profile import main
@@ -25,11 +31,12 @@ def setup(
     )
     
     from .make_shortcut import main
-    main(file, overwrite_shortcuts)
+    main(file, overwrite_shortcuts, clean_shortcuts)
 
 
 if __name__ == '__main__':
     # pox -m mypc_settings preview-config config/default.yaml
     # pox -m mypc_settings preview-config config/user.yaml
     # pox -m mypc_settings setup config/user.yaml
+    # pox -m mypc_settings setup config/user.yaml -o
     cli.run()

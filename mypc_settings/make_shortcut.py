@@ -12,7 +12,8 @@ from mypc_settings import load_config
 @cli.cmd()
 def main(
     config_file: str = 'config/default.yaml',
-    overwrite: bool = False
+    overwrite: bool = False,
+    clean: bool = False,
 ) -> None:
     cfg = load_config(config_file)
     for i, o in cfg['shortcut'].items():
@@ -31,6 +32,8 @@ def main(
                 fs.make_link(i, o)
         else:
             print(':ivs', f'could not find "{i}"')
+    if clean:
+        ...  # TODO
 
 
 def make_shortcut_win32(file_i: str, file_o: str = None) -> None:
