@@ -6,12 +6,13 @@ from lk_utils import timestamp
 
 @cli.cmd()
 def main(root: str) -> None:
-    for p in dedent('''
+    for p in dedent(
+        '''
         applist
         apps
-        apps/bandizip
         apps/bore
         apps/dufs
+        apps/flutter
         apps/jetbrains-toolbox
         apps/jetbrains-toolbox/apps
         apps/jetbrains-toolbox/scripts
@@ -54,8 +55,13 @@ def main(root: str) -> None:
         other
         pictures
         pictures/Inbox
+        pictures/Inbox/<auto>
+        pictures/Wallpaper
+        pictures/Wallpaper/Landscape
+        pictures/Wallpaper/Portrait
         shortcut
         temp
+        temp/<auto>
         temp/archived
         workspace
         workspace/archive
@@ -64,11 +70,16 @@ def main(root: str) -> None:
         workspace/dev-dist
         workspace/playground
         workspace/playground/python-playground
-    ''').splitlines():
+        '''
+    ).splitlines():
         print(p)
-        fs.make_dir(f'{root}/{p}')
-        if p == 'temp':
-            fs.make_dir(f'{root}/{p}/{timestamp("yyyy-mm")}')
+        match p:
+            case 'pictures/Inbox/<auto>':
+                fs.make_dir(f'{root}/{p}/{timestamp("yyyy")}')
+            case 'temp/<auto>':
+                fs.make_dir(f'{root}/{p}/{timestamp("yyyy-mm")}')
+            case _:
+                fs.make_dir(f'{root}/{p}')
 
 
 if __name__ == '__main__':

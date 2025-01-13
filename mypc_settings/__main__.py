@@ -17,6 +17,10 @@ def setup(
     clean_shortcuts: bool = False,
 ) -> None:
     """
+    after setup, don't forget to add this line to the bottom of nushell's -
+    config path (`$nu.config-path`):
+        source <home>/documents/appdata/nushell/likianta-profile.nu
+    
     params:
         overwrite_shortcuts (-o):
         clean_shortcuts (-c):
