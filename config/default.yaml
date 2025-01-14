@@ -2,6 +2,8 @@ home: C:/Likianta
 alias:
   pc: <home>/apps/jetbrains-toolbox/scripts/pycharm
   py: <home>/apps/python/3.13/python.exe
+  # ---
+  ipython: <py> -m IPython
   pip: <py> -m pip
   po: <py> -m poetry
   pob: <po> build -f wheel
@@ -10,6 +12,7 @@ alias:
   por: <po> run
   pou: <po> update
   pox: <po> run python
+  # ---
   strun: <por> streamlit run --browser.gatherUsageStats false --runner.magicEnabled false --server.headless true --server.port
 environment:
   HTTP_PROXY: http://127.0.0.1:7890

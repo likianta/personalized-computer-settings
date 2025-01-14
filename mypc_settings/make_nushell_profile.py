@@ -58,7 +58,8 @@ def main(
                         key, join((f'"{x}",' for x in val), 4)
                     ))
                 else:
-                    output.append('$env.{} = "{}"'.format(key, ';'.join(val)))
+                    sep = ';' if sys.platform == 'win32' else ':'
+                    output.append('$env.{} = "{}"'.format(key, sep.join(val)))
             output.append('')
         case 'windows':
             assert platform == 'win32'

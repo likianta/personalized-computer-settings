@@ -8,7 +8,7 @@ packages = [{ include = "mypc_settings" }]
 
 [tool.poetry.dependencies]
 python = "^3.12"
-argsense = { version = "^0.6.4a1", source = "likianta-host" }
+argsense = { version = "^0.6.4b1", source = "likianta-host" }
 ipython = "^8.23.0"
 lk-logger = { version = "^6.0.3", source = "likianta-host" }
 lk-utils = { version = "^3.1.3a1", source = "likianta-host" }
@@ -17,6 +17,7 @@ pywin32 = { version = "^308", platform = "win32" }
 streamlit = "^1.41.0"
 
 pyarrow = "^18.1.0"  # <- streamlit
+# rpds-py = "^0.22.3"
 
 [[tool.poetry.source]]
 name = "tsinghua"
