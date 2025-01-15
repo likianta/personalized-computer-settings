@@ -7,16 +7,14 @@
 import sys
 import typing as t
 
-from argsense import cli
 from lk_utils import fs
 from lk_utils import timestamp
-from lk_utils.textwrap import join
+from lk_utils.textwrap import join, dedent
 
 from mypc_settings import load_config
 from mypc_settings import reformat_path
 
 
-@cli.cmd()
 def main(
     config_file: str = 'config/default.yaml',
     output_file: str = '<home>/documents/appdata/nushell/likianta-profile.nu',
@@ -77,11 +75,13 @@ def main(
         if not fs.exists(
             x := f'{cfg["home"]}/documents/appdata/nushell/starship-init.nu'
         ):
-            print('''
+            print(
+                '''
                 "starship-init.nu" is not created. use the following command -
                 to create it (in your nushell):
                     starship init nu | save {}
-            '''.format(x))
+                '''.format(x)
+            )
             exit()
         output.append('use {}'.format(x))
     else:
@@ -95,21 +95,24 @@ def main(
     output.append('')
     
     if hide_welcome_message:
-        print('''
+        print(
+            '''
             please manually edit `$nu.config-path` to disable the banner of -
             welcome message:
                 1. search "show_banner"
                 2. set it to `false`
-        ''')
+            '''
+        )
+    
+    _misc(cfg['home'])
     
     fs.dump(output, output_file, 'plain')
     print(f'file is saved to "{output_file}"')
 
 
-if __name__ == '__main__':
-    # pox mypc_settings/make_nushell_profile.py
-    # pox mypc_settings/make_nushell_profile.py --config-file
-    #   config/shell/map_win32_user.yaml -e windows
-    # pox mypc_settings/make_nushell_profile.py --config-file
-    #   config/shell/map_win32_user.yaml -e ignore
-    cli.run(main)
+def _misc(likianta_home_dir: str) -> None:
+    # create a custom icon for nushell profile of windows terminal
+    fs.copy_file(
+        'misc/nushell-profile-icon-for-windows-terminal.ico',
+        '{}/documents/appdata/nushell/wtprofile.ico'.format(likianta_home_dir)
+    )
