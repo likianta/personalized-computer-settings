@@ -5,7 +5,7 @@ from argsense import cli
 from .config import load_config
 
 
-@cli.cmd()
+@cli.cmd('preview')
 def preview_config(file: str) -> None:
     print(':l', load_config(file))
     

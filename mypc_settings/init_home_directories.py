@@ -74,12 +74,16 @@ def main(root: str) -> None:
         workspace/playground/python-playground/data
         '''
     ).splitlines():
-        print(p)
+        print(p, ':s1')
         match p:
             case 'pictures/Inbox/<auto>':
-                fs.make_dir(f'{root}/{p}/{timestamp("yyyy")}')
+                fs.make_dir('{}/{}'.format(
+                    root, p.replace('<auto>', timestamp('y'))
+                ))
             case 'temp/<auto>':
-                fs.make_dir(f'{root}/{p}/{timestamp("yyyy-mm")}')
+                fs.make_dir('{}/{}'.format(
+                    root, p.replace('<auto>', timestamp('y-m'))
+                ))
             case _:
                 fs.make_dir(f'{root}/{p}')
     
