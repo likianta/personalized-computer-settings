@@ -27,9 +27,11 @@ alias:
 environment:
   HTTP_PROXY: http://127.0.0.1:7890
   HTTPS_PROXY: http://127.0.0.1:7890
+  NO_PROXY: localhost,127.0.0.1,192.168.*,::1
   PATH:
     - <home>/apps/bore
     - <home>/apps/dufs
+    - <home>/apps/flutter/bin
     - <home>/apps/git/bin
     - <home>/apps/java/jdk-22.0/bin
     - <home>/apps/jetbrains-toolbox/scripts
@@ -39,7 +41,7 @@ environment:
     - <home>/apps/scoop/apps/flutter/current/bin
     - <home>/apps/scoop/apps/pnpm/current
     - <home>/apps/scoop/shims
-    - <home>/apps/visual-studio-code/bin
+    - <home>/apps/vscode/bin
     # - C:/Program Files/PowerShell/7
     - C:/Windows/System32/WindowsPowerShell/v1.0
   PNPM_HOME: <home>/apps/scoop/apps/pnpm/current

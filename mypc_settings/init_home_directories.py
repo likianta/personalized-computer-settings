@@ -10,9 +10,12 @@ def main(root: str) -> None:
         '''
         applist
         apps
+        apps/android
+        apps/android/sdk
         apps/bore
         apps/dufs
         apps/flutter
+        apps/flutter/pub-cache
         apps/jetbrains-toolbox
         apps/jetbrains-toolbox/apps
         apps/jetbrains-toolbox/scripts
@@ -30,15 +33,18 @@ def main(root: str) -> None:
         apps/qq
         apps/scoop
         apps/sogou-pinyin
+        apps/vscode
         apps/wechat
         backups
         backups/android-apps
         backups/fonts
         backups/software-packages
         backups/software-settings
+        backups/unclassified
         documents
         documents/appdata
         documents/appdata/nushell
+        documents/appdata/photolens
         documents/appdata/qq
         documents/appdata/wechat
         documents/gitbook
@@ -64,10 +70,10 @@ def main(root: str) -> None:
         temp/<auto>
         temp/archived
         workspace
-        workspace/archive
+        workspace/archived
         workspace/com.jlsemi.likianta
+        workspace/creative-studio
         workspace/dev.master.likianta
-        workspace/dev-dist
         workspace/playground
         workspace/playground/python-playground
         workspace/playground/python-playground/code
