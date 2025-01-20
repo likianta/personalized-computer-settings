@@ -2,9 +2,19 @@ home: C:/Likianta
 alias:
   pc: <home>/apps/jetbrains-toolbox/scripts/pycharm
   py: <home>/apps/python/3.13/python.exe
+  py38: <home>/apps/python/3.8/python.exe
+  py39: <home>/apps/python/3.9/python.exe
+  py310: <home>/apps/python/3.10/python.exe
+  py311: <home>/apps/python/3.11/python.exe
+  py312: <home>/apps/python/3.12/python.exe
   # ---
   ipython: <py> -m IPython
   pip: <py> -m pip
+  pip38: <py38> -m pip
+  pip39: <py39> -m pip
+  pip310: <py310> -m pip
+  pip311: <py311> -m pip
+  pip312: <py312> -m pip
   po: <py> -m poetry
   pob: <po> build -f wheel
   poe: <po> env info
@@ -50,7 +60,7 @@ shortcut:
   <home>/backups/software-settings: <shortcut>/<name_as_is>
   <home>/documents: <shortcut>/<name_as_is>
   <home>/documents/appdata: <shortcut>/<name_as_is>
-  <home>/documents/gitbook-ssg/source-docs: <shortcut>/gitbook
+  <home>/documents/gitbook/source-docs: <shortcut>/gitbook
   <home>/downloads: <shortcut>/<name_as_is>
   <home>/pictures: <shortcut>/<name_as_is>
   <home>/temp: <shortcut>/<name_as_is>
