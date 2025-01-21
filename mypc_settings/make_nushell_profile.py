@@ -9,7 +9,7 @@ import typing as t
 
 from lk_utils import fs
 from lk_utils import timestamp
-from lk_utils.textwrap import join, dedent
+from lk_utils.textwrap import join
 
 from mypc_settings import load_config
 from mypc_settings import reformat_path
@@ -20,10 +20,10 @@ def main(
     output_file: str = '<home>/documents/appdata/nushell/likianta-profile.nu',
     environment_settings_scheme: str = 'nushell',
     enable_starship: bool = False,
-    hide_welcome_message: t.Optional[bool] = None,
+    remove_welcome_message: t.Optional[bool] = True,
 ) -> None:
     """
-    kwargs:
+    params:
         environment_settings_scheme (-e): 'nushell', 'windows', 'ignore'
             'nushell': output environment settings to `output_file`.
             'windows': set environment variables in windows.
@@ -94,15 +94,9 @@ def main(
         ))
     output.append('')
     
-    if hide_welcome_message:
-        print(
-            '''
-            please manually edit `$nu.config-path` to disable the banner of -
-            welcome message:
-                1. search "show_banner"
-                2. set it to `false`
-            '''
-        )
+    if remove_welcome_message:
+        # https://www.nushell.sh/book/configuration.html#remove-welcome-message
+        output.append('$env.config.show_banner = false')
     
     _misc(cfg['home'])
     
