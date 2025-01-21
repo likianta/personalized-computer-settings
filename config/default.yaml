@@ -1,12 +1,16 @@
 home: C:/Likianta
 alias:
   pc: <home>/apps/jetbrains-toolbox/scripts/pycharm
+  po: <home>/apps/python/3.13/Scripts/poetry.exe
   py: <home>/apps/python/3.13/python.exe
   py38: <home>/apps/python/3.8/python.exe
   py39: <home>/apps/python/3.9/python.exe
   py310: <home>/apps/python/3.10/python.exe
   py311: <home>/apps/python/3.11/python.exe
   py312: <home>/apps/python/3.12/python.exe
+  uvr: uv run --no-sync --frozen --all-groups
+  uvs: uv sync --no-install-project --all-groups
+  uvx: uv run --no-sync --frozen --all-groups python
   # ---
   ipython: <py> -m IPython
   pip: <py> -m pip
@@ -15,7 +19,6 @@ alias:
   pip310: <py310> -m pip
   pip311: <py311> -m pip
   pip312: <py312> -m pip
-  po: <py> -m poetry
   pob: <po> build -f wheel
   poe: <po> env info
   poi: <po> install --no-root
