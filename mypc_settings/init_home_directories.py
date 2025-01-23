@@ -141,7 +141,8 @@ def main(root: str) -> None:
                 ''',
                 join_sep='\\'
             ),
-            x
+            x,
+            'plain'
         )
 
 
