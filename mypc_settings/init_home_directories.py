@@ -5,20 +5,24 @@ from lk_utils import timestamp
 
 
 @cli.cmd()
-def main(root: str) -> None:
-    for p in dedent(
+def main(root: str, extend: bool = True) -> None:
+    paths = dedent(
         '''
         applist
         apps
         apps/android
         apps/android/sdk
         apps/bore
+        apps/clash-nyanpasu
+        apps/depsland
         apps/dufs
         apps/flutter
         apps/flutter/pub-cache
+        apps/git
         apps/jetbrains-toolbox
         apps/jetbrains-toolbox/apps
         apps/jetbrains-toolbox/scripts
+        apps/netease-cloud-music
         apps/nodejs
         apps/nushell
         apps/pypoetry
@@ -31,10 +35,15 @@ def main(root: str) -> None:
         apps/python/3.12
         apps/python/3.13
         apps/qq
+        apps/qq-pc-manager
         apps/scoop
         apps/sogou-pinyin
+        apps/sunlogin
+        apps/typora
         apps/vscode
         apps/wechat
+        apps/wps-office
+        apps/xyplorer-free
         backups
         backups/android-apps
         backups/fonts
@@ -44,27 +53,19 @@ def main(root: str) -> None:
         documents
         documents/appdata
         documents/appdata/nushell
-        documents/appdata/photolens
+        documents/appdata/pixcall
+        documents/appdata/pixcall/default-library
         documents/appdata/qq
         documents/appdata/wechat
         documents/gitbook
         documents/tutorials
         documents/worksheets
         downloads
-        entertainment
-        entertainment/comic
-        entertainment/music
-        entertainment/novel
-        entertainment/video
-        games
-        nsfw
         other
         pictures
         pictures/Inbox
         pictures/Inbox/<auto>
         pictures/Wallpaper
-        pictures/Wallpaper/Landscape
-        pictures/Wallpaper/Portrait
         shortcut
         temp
         temp/<auto>
@@ -79,7 +80,22 @@ def main(root: str) -> None:
         workspace/playground/python-playground/code
         workspace/playground/python-playground/data
         '''
-    ).splitlines():
+    )
+    if extend:
+        paths += '\n' + dedent(
+            '''
+            apps/steam
+            entertainment
+            entertainment/comic
+            entertainment/music
+            entertainment/novel
+            entertainment/video
+            games
+            nsfw
+            '''
+        )
+    
+    for p in paths.splitlines():
         print(p, ':s1')
         match p:
             case 'pictures/Inbox/<auto>':
@@ -111,13 +127,12 @@ def main(root: str) -> None:
                 python = "^3.12"
                 
                 # --- A
-                argsense = { version = "^0.6.4b1", source = "likianta-host" }
+                argsense = { version = "^0.6.4", source = "likianta" }
                 ipython = "^8.31.0"
-                lk-logger = { version = "^6.0.3", source = "likianta-host" }
-                lk-utils = { version = "^3.1.3a2", source = "likianta-host" }
+                lk-logger = { version = "^6.0.3", source = "likianta" }
+                lk-utils = { version = "^3.1.3a3", source = "likianta" }
                 streamlit = "^1.41.0"
-                streamlit-canary = { version = "^0.1.0a14", source = \\
-                "likianta-host" }
+                streamlit-canary = { version = "^0.1.0a14", source = "likianta" }
                 
                 # --- B
                 # ...
@@ -131,7 +146,7 @@ def main(root: str) -> None:
                 priority = "primary"
                 
                 [[tool.poetry.source]]
-                name = "likianta-host"
+                name = "likianta"
                 url = "http://likianta.pro:2131/"
                 priority = "supplemental"
                 
