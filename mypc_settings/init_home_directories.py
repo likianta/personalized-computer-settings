@@ -17,7 +17,6 @@ def main(root: str, extend: bool = True) -> None:
         apps/depsland
         apps/dufs
         apps/flutter
-        apps/flutter/pub-cache
         apps/git
         apps/jetbrains-toolbox
         apps/jetbrains-toolbox/apps
@@ -52,9 +51,11 @@ def main(root: str, extend: bool = True) -> None:
         backups/unclassified
         documents
         documents/appdata
+        documents/appdata/flutter
+        documents/appdata/flutter/pub-cache
         documents/appdata/nushell
         documents/appdata/pixcall
-        documents/appdata/pixcall/default-library
+        documents/appdata/pixcall/MyPictures
         documents/appdata/qq
         documents/appdata/wechat
         documents/gitbook
@@ -92,6 +93,12 @@ def main(root: str, extend: bool = True) -> None:
             entertainment/video
             games
             nsfw
+            nsfw/comics
+            nsfw/footage
+            nsfw/movies
+            nsfw/other
+            nsfw/pictures
+            nsfw/unclassified
             '''
         )
     

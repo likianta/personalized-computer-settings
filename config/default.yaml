@@ -28,6 +28,7 @@ alias:
   # ---
   strun: <por> streamlit run --browser.gatherUsageStats false --runner.magicEnabled false --server.headless true --server.port
 environment:
+  FLUTTER_STORAGE_BASE_URL: https://storage.flutter-io.cn
   HTTP_PROXY: http://127.0.0.1:7890
   HTTPS_PROXY: http://127.0.0.1:7890
   NO_PROXY: localhost,127.0.0.1,192.168.*,::1
@@ -48,6 +49,8 @@ environment:
     # - C:/Program Files/PowerShell/7
     - C:/Windows/System32/WindowsPowerShell/v1.0
   PNPM_HOME: <home>/apps/scoop/apps/pnpm/current
+  PUB_CACHE: <home>/documents/appdata/flutter/pub-cache
+  PUB_HOSTED_URL: https://pub.flutter-io.cn
   PYTHONPATH:
     - .
     - src
