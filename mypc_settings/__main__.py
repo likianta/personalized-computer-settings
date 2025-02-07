@@ -43,6 +43,7 @@ def setup(
 
 if __name__ == '__main__':
     # pox -m mypc_settings -h
+    # pox -m mypc_settings init-home-dirs C:/Likianta :true
     # pox -m mypc_settings preview config/default.yaml
     # pox -m mypc_settings preview config/user.yaml
     # pox -m mypc_settings setup config/user.yaml

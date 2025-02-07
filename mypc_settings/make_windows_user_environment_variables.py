@@ -12,7 +12,12 @@ from mypc_settings import common
 def main(config_file: str = 'config/default.yaml') -> None:
     cfg = common.load_config(fs.abspath(config_file))
     for key, val in cfg['environment'].items():
-        val = ';'.join(val).replace('/', '\\').replace('http:\\\\', 'http://')
+        val = (
+            ';'.join(val)
+            .replace('/', '\\')
+            .replace('http:\\\\', 'http://')
+            .replace('https:\\\\', 'https://')
+        )
         if os.environ.get(key) == val:
             print(key, val, ':v3s1')
         else:

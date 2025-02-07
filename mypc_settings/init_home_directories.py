@@ -39,6 +39,10 @@ def main(root: str, extend: bool = True) -> None:
         apps/sogou-pinyin
         apps/sunlogin
         apps/typora
+        apps/visual-studio
+        apps/visual-studio/packages
+        apps/visual-studio/shared
+        apps/visual-studio/vs-community-2022
         apps/vscode
         apps/wechat
         apps/wps-office
@@ -115,6 +119,11 @@ def main(root: str, extend: bool = True) -> None:
                 ))
             case _:
                 fs.make_dir(f'{root}/{p}')
+    
+    # -------------------------------------------------------------------------
+    
+    if not fs.exist(x := f'{root}/pictures/Pixcall'):
+        fs.make_link(f'{root}/documents/appdata/pixcall/MyPictures', x)
     
     if not fs.exist(
         x := f'{root}/workspace/playground/python-playground/pyproject.toml'
