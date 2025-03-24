@@ -8,6 +8,7 @@ alias:
   py310: <home>/apps/python/3.10/python.exe
   py311: <home>/apps/python/3.11/python.exe
   py312: <home>/apps/python/3.12/python.exe
+  py313: <home>/apps/python/3.13/python.exe
   uvr: uv run --no-sync --frozen --all-groups
   uvs: uv sync --no-install-project --all-groups
   uvx: uv run --no-sync --frozen --all-groups python
@@ -19,6 +20,7 @@ alias:
   pip310: <py310> -m pip
   pip311: <py311> -m pip
   pip312: <py312> -m pip
+  pip313: <py313> -m pip
   pob: <po> build -f wheel
   poe: <po> env info
   poi: <po> install --no-root
@@ -33,21 +35,23 @@ environment:
   HTTPS_PROXY: http://127.0.0.1:7890
   NO_PROXY: localhost,127.0.0.1,192.168.*,::1
   PATH:
+    - <home>/apps/alist
     - <home>/apps/bore
     - <home>/apps/dufs
     - <home>/apps/flutter/bin
     - <home>/apps/git/bin
     - <home>/apps/java/jdk-22.0/bin
     - <home>/apps/jetbrains-toolbox/scripts
+    - <home>/apps/nodejs/node
+    - <home>/apps/nodejs/pnpm
     - <home>/apps/nushell
     - <home>/apps/python/3.13
     - <home>/apps/python/3.13/Scripts
-    - <home>/apps/scoop/apps/pnpm/current
     - <home>/apps/scoop/shims
     - <home>/apps/vscode/bin
     # - C:/Program Files/PowerShell/7
     - C:/Windows/System32/WindowsPowerShell/v1.0
-  PNPM_HOME: <home>/apps/scoop/apps/pnpm/current
+  PNPM_HOME: <home>/apps/nodejs/pnpm
   PUB_CACHE: <home>/documents/appdata/flutter/pub-cache
   # PUB_HOSTED_URL: https://pub.flutter-io.cn
   PYTHONPATH:
@@ -70,6 +74,7 @@ shortcut:
   <home>/documents/gitbook/source-docs: <shortcut>/gitbook
   <home>/downloads: <shortcut>/<name_as_is>
   <home>/pictures: <shortcut>/<name_as_is>
+  <home>/pictures/Inbox/<yyyy>: <shortcut>/pictures-inbox
   <home>/temp: <shortcut>/<name_as_is>
   <home>/temp/<yyyy>-<mm>: <shortcut>/temp-(<yyyy>-<mm>)
   <home>/workspace: <shortcut>/<name_as_is>

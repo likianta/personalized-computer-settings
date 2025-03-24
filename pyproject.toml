@@ -8,15 +8,15 @@ packages = [{ include = "mypc_settings" }]
 
 [tool.poetry.dependencies]
 python = "^3.12"
-argsense = { version = "^0.7.0b2", source = "likianta-host" }
-ipython = "^8.23.0"
-lk-logger = { version = "^6.0.3", source = "likianta-host" }
-lk-utils = { version = "^3.1.3a3", source = "likianta-host" }
+argsense = { version = "^0.7.1", source = "likianta" }
+ipython = "^9.0.0"
+lk-logger = { version = "^6.0.5", source = "likianta" }
+lk-utils = { version = "^3.1.3", source = "likianta" }
 psutil = "^6.1.1"
 pywin32 = { version = "^308", platform = "win32" }
-streamlit = "^1.41.0"
+streamlit = "^1.43.0"
 
-pyarrow = "^18.1.0"  # <- streamlit
+# pyarrow = "^18.1.0"  # <- streamlit
 # rpds-py = "^0.22.3"
 
 [[tool.poetry.source]]
@@ -25,8 +25,8 @@ url = "https://pypi.tuna.tsinghua.edu.cn/simple/"
 priority = "primary"
 
 [[tool.poetry.source]]
-name = "likianta-host"
-url = "http://likianta.pro:2131/"
+name = "likianta"
+url = "http://47.102.108.149:2131/"
 priority = "supplemental"
 
 [build-system]

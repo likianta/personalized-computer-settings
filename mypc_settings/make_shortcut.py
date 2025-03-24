@@ -31,7 +31,7 @@ def main(
             else:
                 fs.make_link(i, o)
         else:
-            print(':ivs', f'could not find "{i}"')
+            print(':iv', f'could not find "{i}"')
     if clean:
         ...  # TODO
 

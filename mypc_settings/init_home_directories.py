@@ -23,6 +23,11 @@ def main(root: str, extend: bool = True) -> None:
         apps/jetbrains-toolbox/scripts
         apps/netease-cloud-music
         apps/nodejs
+        apps/nodejs/globals
+        apps/nodejs/globals/cache
+        apps/nodejs/globals/modules
+        apps/nodejs/node
+        apps/nodejs/pnpm
         apps/nushell
         apps/pypoetry
         apps/pypoetry/cache
