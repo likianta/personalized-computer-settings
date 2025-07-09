@@ -1,3 +1,4 @@
+import os
 from argsense import cli
 from lk_utils import dedent
 from lk_utils import fs
@@ -8,7 +9,7 @@ from lk_utils import timestamp
 def main(root: str, extend: bool = True) -> None:
     paths = dedent(
         '''
-        applist
+        # <applist>
         apps
         apps/android
         apps/android/sdk
@@ -38,8 +39,13 @@ def main(root: str, extend: bool = True) -> None:
         apps/python/3.11
         apps/python/3.12
         apps/python/3.13
+        apps/python/3.14
         apps/qq
         apps/qq-pc-manager
+        apps/rust
+        apps/rust/cargo
+        apps/rust/rust
+        apps/rust/rustup
         apps/scoop
         apps/sogou-pinyin
         apps/sunlogin
@@ -75,6 +81,7 @@ def main(root: str, extend: bool = True) -> None:
         pictures
         pictures/Inbox
         pictures/Inbox/<auto>
+        pictures/Unclassified
         pictures/Wallpaper
         shortcut
         temp
@@ -89,6 +96,7 @@ def main(root: str, extend: bool = True) -> None:
         workspace/playground/python-playground
         workspace/playground/python-playground/code
         workspace/playground/python-playground/data
+        workspace/playground/rust-playground
         '''
     )
     if extend:
@@ -113,7 +121,14 @@ def main(root: str, extend: bool = True) -> None:
     
     for p in paths.splitlines():
         print(p, ':s1')
+        if p.startswith('#'):
+            continue
         match p:
+            case '<applist>':
+                fs.make_shortcut(
+                    os.path.expanduser('~/Desktop'),
+                    '{}/applist.lnk'.format(root)
+                )
             case 'pictures/Inbox/<auto>':
                 fs.make_dir('{}/{}'.format(
                     root, p.replace('<auto>', timestamp('y'))
@@ -127,8 +142,8 @@ def main(root: str, extend: bool = True) -> None:
     
     # -------------------------------------------------------------------------
     
-    if not fs.exist(x := f'{root}/pictures/Pixcall'):
-        fs.make_link(f'{root}/documents/appdata/pixcall/MyPictures', x)
+    # if not fs.exist(x := f'{root}/pictures/Pixcall'):
+    #     fs.make_link(f'{root}/documents/appdata/pixcall/MyPictures', x)
     
     if not fs.exist(
         x := f'{root}/workspace/playground/python-playground/pyproject.toml'
@@ -140,7 +155,7 @@ def main(root: str, extend: bool = True) -> None:
                 name = "python-playground"
                 version = "0.0.0"
                 description = ""
-                authors = ["likianta <likianta@foxmail.com>"]
+                authors = ["Likianta <likianta@foxmail.com>"]
                 # readme = "README.md"
                 packages = [{ include = "code" }]
                 
@@ -148,12 +163,12 @@ def main(root: str, extend: bool = True) -> None:
                 python = "^3.12"
                 
                 # --- A
-                argsense = { version = "^0.6.4", source = "likianta" }
-                ipython = "^8.31.0"
-                lk-logger = { version = "^6.0.3", source = "likianta" }
-                lk-utils = { version = "^3.1.3a3", source = "likianta" }
-                streamlit = "^1.41.0"
-                streamlit-canary = { version = "^0.1.0a14", source = "likianta" }
+                argsense = { version = "^1.0.1b1", source = "likianta" }
+                ipython = "^9.4.0"
+                lk-logger = { version = "^6.0.7a0", source = "likianta" }
+                lk-utils = { version = "^3.3.0a16", source = "likianta" }
+                streamlit = ">=1.45.0,<1.46.0"
+                streamlit-canary = { version = "^0.1.0b10", source = "likianta" }
                 
                 # --- B
                 # ...

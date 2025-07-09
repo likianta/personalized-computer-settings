@@ -28,8 +28,9 @@ alias:
   pou: <po> update
   pox: <po> run python
   # ---
-  strun: <por> streamlit run --browser.gatherUsageStats false --runner.magicEnabled false --server.headless true --server.port
+  strun: <pox> -m streamlit run --browser.gatherUsageStats false --runner.magicEnabled false --server.headless true --server.port
 environment:
+  CARGO_HOME: <home>/apps/rust/cargo
   # FLUTTER_STORAGE_BASE_URL: https://storage.flutter-io.cn
   HTTP_PROXY: http://127.0.0.1:7890
   HTTPS_PROXY: http://127.0.0.1:7890
@@ -40,13 +41,14 @@ environment:
     - <home>/apps/dufs
     - <home>/apps/flutter/bin
     - <home>/apps/git/bin
-    - <home>/apps/java/jdk-22.0/bin
+    # - <home>/apps/java/jdk-22.0/bin
     - <home>/apps/jetbrains-toolbox/scripts
     - <home>/apps/nodejs/node
     - <home>/apps/nodejs/pnpm
     - <home>/apps/nushell
     - <home>/apps/python/3.13
     - <home>/apps/python/3.13/Scripts
+    - <home>/apps/rust/cargo/bin
     - <home>/apps/scoop/shims
     - <home>/apps/vscode/bin
     # - C:/Program Files/PowerShell/7
@@ -59,6 +61,7 @@ environment:
     - src
     - lib
   PYTHONUTF8: 1
+  RUSTUP_HOME: <home>/apps/rust/rustup
 shortcut:
   <home>/applist: <shortcut>/<name_as_is>
   <home>/apps: <shortcut>/<name_as_is>
