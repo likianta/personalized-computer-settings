@@ -74,7 +74,9 @@ def main(root: str, extend: bool = True) -> None:
         documents/appdata/qq
         documents/appdata/wechat
         documents/gitbook
+        # documents/notebook
         documents/tutorials
+        documents/webclips
         documents/worksheets
         downloads
         other
@@ -151,24 +153,33 @@ def main(root: str, extend: bool = True) -> None:
         fs.dump(
             dedent(
                 '''
-                [tool.poetry]
+                [project]
                 name = "python-playground"
                 version = "0.0.0"
                 description = ""
-                authors = ["Likianta <likianta@foxmail.com>"]
-                # readme = "README.md"
+                authors = [{ name = "Likianta", email = \\
+                "likianta@foxmail.com" }]
                 packages = [{ include = "code" }]
+                requires-python = ">=3.12"
+                dynamic = ["dependencies"]
                 
                 [tool.poetry.dependencies]
                 python = "^3.12"
                 
                 # --- A
+                airmise = { version = "^0.4.0b1", source = "likianta" }
                 argsense = { version = "^1.0.1b1", source = "likianta" }
+                faker = "^37.0.0"
+                fastapi = { version = "^0.115.11", extras = ["standard"] }
                 ipython = "^9.4.0"
                 lk-logger = { version = "^6.0.7a0", source = "likianta" }
-                lk-utils = { version = "^3.3.0a16", source = "likianta" }
-                streamlit = ">=1.45.0,<1.46.0"
-                streamlit-canary = { version = "^0.1.0b10", source = "likianta" }
+                lk-utils = { version = "^3.3.0a16", source = "likianta", \\
+                extras = ["all"] }
+                omni-driver-kit = { version = "^4.1.0a11", source = "likianta" }
+                pyapp-window = { version = "^2.2.0b4", source = "likianta" }
+                streamlit = "^1.45.0"
+                streamlit-canary = { version = "^0.1.0b10", source = \\
+                "likianta" }
                 
                 # --- B
                 # ...
@@ -183,7 +194,7 @@ def main(root: str, extend: bool = True) -> None:
                 
                 [[tool.poetry.source]]
                 name = "likianta"
-                url = "http://likianta.pro:2131/"
+                url = "http://localhost:2131/"
                 priority = "supplemental"
                 
                 [build-system]
