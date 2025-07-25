@@ -32,25 +32,25 @@ reference = "tsinghua"
 
 [[package]]
 name = "argsense"
-version = "1.0.1b1"
+version = "1.0.1"
 description = "New command line interface based on Rich library."
 optional = false
 python-versions = ">=3.8"
 groups = ["main"]
 files = [
-    {file = "argsense-1.0.1b1-py3-none-any.whl", hash = "sha256:e8b4e6b946dfd2dd9e2d5bdec57c0d3b646cfe545bdb9a6c0918987d2d6e94ae"},
+    {file = "argsense-1.0.1-py3-none-any.whl", hash = "sha256:a6e6d89d4ccd4eafd43fbd37d8beb72b257c1b9f299c387cca7a0fc44954cc45"},
 ]
 
 [package.dependencies]
 lk-logger = ">=6.0.6,<7.0.0"
-rich = ">=14.0.0,<15.0.0"
+rich = ">=13.9.0"
 
 [package.extras]
 gui = ["pysimplegui"]
 
 [package.source]
 type = "legacy"
-url = "http://47.102.108.149:2131"
+url = "http://localhost:2131"
 reference = "likianta"
 
 [[package]]
@@ -550,35 +550,35 @@ reference = "tsinghua"
 
 [[package]]
 name = "lk-logger"
-version = "6.0.7a0"
+version = "6.0.7a1"
 description = "Python print with source map and varnames."
 optional = false
 python-versions = ">=3.8,<4.0"
 groups = ["main"]
 files = [
-    {file = "lk_logger-6.0.7a0-py3-none-any.whl", hash = "sha256:01e59e2a11e2b84d282795f024ffe9954042c317aa70dc76c020d01ddefd11ac"},
+    {file = "lk_logger-6.0.7a1-py3-none-any.whl", hash = "sha256:6ee223f5092cd80d679452e22dd54a6428504b4d851d92d664ae4ff552ceb3a5"},
 ]
 
 [package.dependencies]
-rich = ">=14.0.0,<15.0.0"
+rich = ">=13.9.0"
 
 [package.extras]
 ext = ["svg-ultralight (>=0.34.0,<0.35.0) ; python_version >= \"3.9\" and python_version < \"4.0\""]
 
 [package.source]
 type = "legacy"
-url = "http://47.102.108.149:2131"
+url = "http://localhost:2131"
 reference = "likianta"
 
 [[package]]
 name = "lk-utils"
-version = "3.3.0a16"
+version = "3.3.0a17"
 description = "LK Utils is a set of utility wrappers made for data processing."
 optional = false
 python-versions = ">=3.8"
 groups = ["main"]
 files = [
-    {file = "lk_utils-3.3.0a16-py3-none-any.whl", hash = "sha256:5ec442670b9f495d61b23552f4ec2a445d1b7cbf0a42ec28911c07a2503a5fcf"},
+    {file = "lk_utils-3.3.0a17-py3-none-any.whl", hash = "sha256:99757ec3df5174bd3166dd00156d2170c41df5000b5c78f95f5d930872101f1a"},
 ]
 
 [package.dependencies]
@@ -586,7 +586,7 @@ argsense = ">=1.0.0,<2.0.0"
 lk-logger = ">=6.0.6,<7.0.0"
 psutil = ">=6.0.0"
 pyyaml = ">=6.0.0,<7.0.0"
-rich = ">=14.0.0,<15.0.0"
+rich = ">=13.9.0"
 typing-extensions = ">=4.0.0,<5.0.0"
 
 [package.extras]
@@ -596,7 +596,7 @@ exl = ["xlrd", "xlsxwriter"]
 
 [package.source]
 type = "legacy"
-url = "http://47.102.108.149:2131"
+url = "http://localhost:2131"
 reference = "likianta"
 
 [[package]]
@@ -1998,4 +1998,4 @@ reference = "tsinghua"
 [metadata]
 lock-version = "2.1"
 python-versions = "^3.12"
-content-hash = "3e0eda5741f6c83d261ea4b43e0a70d0cd797d7643cac34c7f2884580b4cd2c9"
+content-hash = "4a06652981a490e4da96ec896484d3e60075c942b7ec83479ede728613037a98"

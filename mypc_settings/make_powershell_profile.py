@@ -1,7 +1,6 @@
 import os
 
 from argsense import cli
-from lk_utils import dumps
 from lk_utils import fs
 from lk_utils import timestamp
 
@@ -54,7 +53,7 @@ def main(
     if enter_nushell:
         output.append('C:/Likianta/apps/nushell/nu.exe')
     
-    dumps(output, output_file, 'plain')
+    fs.dump(output, output_file, 'plain')
 
 
 if __name__ == '__main__':

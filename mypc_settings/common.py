@@ -60,7 +60,7 @@ def _load_config(file: str) -> dict:
     else:
         assert x != fs.basename(file)
         parent_file = '{}/{}'.format(fs.parent(file), x)
-    assert fs.exists(parent_file)
+    assert fs.exist(parent_file)
     base = _load_config(parent_file)
     # print(base, ':vl')
     

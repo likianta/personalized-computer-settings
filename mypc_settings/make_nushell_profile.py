@@ -72,7 +72,7 @@ def main(
     
     if enable_starship:
         # https://starship.rs/guide/#step-2-set-up-your-shell-to-use-starship
-        if not fs.exists(
+        if not fs.exist(
             x := f'{cfg["home"]}/documents/appdata/nushell/starship-init.nu'
         ):
             print(

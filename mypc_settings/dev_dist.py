@@ -16,7 +16,7 @@ def main(
         dir_o = '{}/dev-dist/{}'.format(root, v)
         assert dir_i.endswith('/dist')
         common.print_conversion(fs.relpath(dir_i, root), f'dev_dist/{v}')
-        if fs.exists(dir_i):
+        if fs.exist(dir_i):
             fs.make_link(dir_i, dir_o)
         else:
             print('^   skip non-existent "dist" folder', ':vs')

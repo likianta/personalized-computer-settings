@@ -17,11 +17,11 @@ def main(
 ) -> None:
     cfg = load_config(config_file)
     for i, o in cfg['shortcut'].items():
-        if fs.exists(i):
+        if fs.exist(i):
             print('{} -> {}'.format(
                 fs.relpath(i, cfg['home']), fs.relpath(o, cfg['home'])
             ), ':r2')
-            if fs.exists(o):
+            if fs.exist(o):
                 if overwrite:
                     fs.remove(o)
                 else:
