@@ -7,7 +7,7 @@ from functools import partial
 from lk_utils import fs
 from lk_utils import timestamp
 
-home = ...
+home = ''
 
 
 def load_config(file: str) -> dict:
@@ -29,7 +29,20 @@ def load_config(file: str) -> dict:
         }
     if 'shortcut' in data:
         data['shortcut'] = _reformat_shortcut_paths(data['shortcut'])
+        data['shortcut'] = _deduplicate_shortcut_paths(data['shortcut'])
     return data
+
+
+def _deduplicate_shortcut_paths(data: dict) -> dict:
+    out = {}
+    output_paths = []
+    for k, v in reversed(data.items()):
+        if v in output_paths:
+            print('pop duplicate path: {} -> {}'.format(k, v), ':v7')
+        else:
+            out[k] = v
+            output_paths.append(v)
+    return out
 
 
 def _determine_home_directory(config: dict) -> str:
@@ -44,7 +57,7 @@ def _determine_home_directory(config: dict) -> str:
             'C:/Likianta'  # win32
         )
     print(home, ':v2')
-    assert home != '...' and fs.exist(home)
+    assert home and home != '...' and fs.exist(home)
     return home
 
 
@@ -174,6 +187,7 @@ def reformat_path(
                         'Start Menu'
                     )
         
+        # noinspection PyTypeChecker
         if custom_replacer and (x := custom_replacer(item)):
             return x
         

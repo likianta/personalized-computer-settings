@@ -30,13 +30,16 @@ alias:
   # ---
   strun: <pox> -m streamlit run --browser.gatherUsageStats false --runner.magicEnabled false --server.headless true --server.port
 environment:
+  ANDROID_HOME: <home>/apps/android/sdk
+  ANDROID_SDK_ROOT: <home>/apps/android/sdk
   CARGO_HOME: <home>/apps/rust/cargo
   # FLUTTER_STORAGE_BASE_URL: https://storage.flutter-io.cn
   HTTP_PROXY: http://127.0.0.1:7890
   HTTPS_PROXY: http://127.0.0.1:7890
   NO_PROXY: localhost,127.0.0.1,192.168.*,::1
   PATH:
-    - <home>/apps/alist
+    - <home>/apps/android/sdk/cmdline-tools/latest/bin
+    - <home>/apps/android/sdk/platform-tools
     - <home>/apps/bore
     - <home>/apps/dufs
     - <home>/apps/flutter/bin
