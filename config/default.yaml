@@ -1,17 +1,18 @@
 home: C:/Likianta
 alias:
   pc: <home>/apps/jetbrains-toolbox/scripts/pycharm
-  po: <home>/apps/python/3.13/Scripts/poetry.exe
-  py: <home>/apps/python/3.13/python.exe
+  po: <home>/apps/python/3.14/Scripts/poetry.exe
+  py: <home>/apps/python/3.14/python.exe
   py38: <home>/apps/python/3.8/python.exe
   py39: <home>/apps/python/3.9/python.exe
   py310: <home>/apps/python/3.10/python.exe
   py311: <home>/apps/python/3.11/python.exe
   py312: <home>/apps/python/3.12/python.exe
   py313: <home>/apps/python/3.13/python.exe
-  uvr: uv run --no-sync --frozen --all-groups
-  uvs: uv sync --no-install-project --all-groups
-  uvx: uv run --no-sync --frozen --all-groups python
+  py314: <home>/apps/python/3.14/python.exe
+  # uvr: uv run --no-sync --frozen --all-groups
+  # uvs: uv sync --no-install-project --all-groups
+  # uvx: uv run --no-sync --frozen --all-groups python
   # ---
   ipython: <py> -m IPython
   pip: <py> -m pip
@@ -21,6 +22,7 @@ alias:
   pip311: <py311> -m pip
   pip312: <py312> -m pip
   pip313: <py313> -m pip
+  pip314: <py314> -m pip
   pob: <po> build -f wheel
   poe: <po> env info
   poi: <po> install --no-root
@@ -49,8 +51,8 @@ environment:
     - <home>/apps/nodejs/node
     - <home>/apps/nodejs/pnpm
     - <home>/apps/nushell
-    - <home>/apps/python/3.13
-    - <home>/apps/python/3.13/Scripts
+    - <home>/apps/python/3.14
+    - <home>/apps/python/3.14/Scripts
     - <home>/apps/rust/cargo/bin
     - <home>/apps/scoop/shims
     - <home>/apps/vscode/bin
@@ -68,7 +70,7 @@ environment:
 shortcut:
   <home>/applist: <shortcut>/<name_as_is>
   <home>/apps: <shortcut>/<name_as_is>
-  <home>/apps/python/3.13: <shortcut>/python-3.13
+  <home>/apps/python/3.14: <shortcut>/python-3.14
   <home>/apps/pypoetry/cache/virtualenvs: <shortcut>/pypoetry-env
   <home>/apps/scoop/apps: <shortcut>/scoop-apps
   <home>/apps/scoop/shims: <shortcut>/scoop-shims
