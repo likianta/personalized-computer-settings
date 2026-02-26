@@ -6,7 +6,10 @@ from lk_utils import timestamp
 
 
 @cli.cmd()
-def main(root: str, extend: bool = True) -> None:
+def main(
+    root: str, picture_classing_language='zh', extend: bool = True
+    #   picture_classing_language: 'zh', 'zh_ex', 'en', 'en_ex'
+) -> None:
     paths = dedent(
         '''
         # <applist>
@@ -81,10 +84,6 @@ def main(root: str, extend: bool = True) -> None:
         downloads
         other
         pictures
-        pictures/Inbox
-        pictures/Inbox/<auto>
-        pictures/Unclassified
-        pictures/Wallpaper
         shortcut
         temp
         temp/<auto>
@@ -101,6 +100,58 @@ def main(root: str, extend: bool = True) -> None:
         workspace/playground/rust-playground
         '''
     )
+    match picture_classing_language:
+        case 'zh':
+            paths += '\n' + '收集'
+        case 'zh_ex':
+            paths += '\n' + dedent(
+                '''
+                pictures/壁纸
+                pictures/壁纸/横屏
+                pictures/壁纸/竖屏
+                pictures/梗图
+                pictures/梗图/热评 帖子 神对话
+                pictures/其他
+                pictures/其他/车祸 事故 灾难
+                pictures/其他/恐怖
+                pictures/其他/两性
+                pictures/其他/猫猫以及各种动物
+                pictures/其他/生活 人生
+                pictures/收集
+                pictures/头像
+                pictures/我的
+                pictures/我的/常理工
+                pictures/我的/电子设备
+                pictures/我的/工作
+                pictures/我的/工作/开发日志
+                pictures/我的/绘画
+                pictures/我的/开车
+                pictures/我的/美食拍拍拍
+                pictures/我的/上海
+                pictures/我的/实体娃娃
+                pictures/我的/租房
+                pictures/我的/租房/泊寓
+                pictures/我的/租房/梅陇一村
+                pictures/我的/租房/鹏裕苑
+                pictures/我的/租房/禹州金桥
+                # TODO...
+                '''
+            )
+            raise NotImplementedError
+        case 'en':
+            paths += '\n' + 'Inbox'
+        case 'en_ex':
+            paths += '\n' + dedent(
+                '''
+                pictures/Inbox
+                pictures/Other
+                pictures/Wallpaper
+                pictures/Wallpaper/Landscape
+                pictures/Wallpaper/Portrait
+                # TODO...
+                '''
+            )
+            raise NotImplementedError
     if extend:
         paths += '\n' + dedent(
             '''
@@ -118,6 +169,7 @@ def main(root: str, extend: bool = True) -> None:
             nsfw/other
             nsfw/pictures
             nsfw/unclassified
+            other/wallpaper-slideshow
             '''
         )
     
