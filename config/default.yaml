@@ -30,7 +30,7 @@ alias:
   pou: <po> update
   pox: <po> run python
   # ---
-  strun: <pox> -m streamlit run --browser.gatherUsageStats false --runner.magicEnabled false --server.headless true --server.port
+  strun: <por> streamlit run --browser.gatherUsageStats false --runner.magicEnabled false --server.headless true --server.port
 environment:
   ANDROID_HOME: <home>/apps/android/sdk
   ANDROID_SDK_ROOT: <home>/apps/android/sdk

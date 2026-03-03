@@ -77,7 +77,6 @@ def main(
         documents/appdata/qq
         documents/appdata/wechat
         documents/gitbook
-        # documents/notebook
         documents/tutorials
         documents/webclips
         documents/worksheets
@@ -161,6 +160,7 @@ def main(
             entertainment/music
             entertainment/novel
             entertainment/video
+            entertainment/video/short
             games
             nsfw
             nsfw/comics
@@ -219,18 +219,18 @@ def main(
                 python = "^3.12"
                 
                 # --- A
-                airmise = { version = "^0.4.0b1", source = "likianta" }
-                argsense = { version = "^1.0.1b1", source = "likianta" }
+                airmise = { version = "^2.0.1a1", source = "likianta" }
+                argsense = { version = "^1.1.1a0", source = "likianta" }
                 faker = "^37.0.0"
                 fastapi = { version = "^0.115.11", extras = ["standard"] }
-                ipython = "^9.4.0"
-                lk-logger = { version = "^6.0.7a0", source = "likianta" }
-                lk-utils = { version = "^3.3.0a16", source = "likianta", \\
+                ipython = "^9.10.0"
+                lk-logger = { version = ">=6.0.7,<6.1.0", source = "likianta" }
+                lk-utils = { version = "^3.5.0a11", source = "likianta", \\
                 extras = ["all"] }
-                omni-driver-kit = { version = "^4.1.0a11", source = "likianta" }
-                pyapp-window = { version = "^2.2.0b4", source = "likianta" }
-                streamlit = "^1.45.0"
-                streamlit-canary = { version = "^0.1.0b10", source = \\
+                omni-driver-kit = { version = "^4.1.3a3", source = "likianta" }
+                pyapp-window = { version = ">=2.1.5a5,<2.2.0", source = "likianta" }
+                streamlit = "^1.54.0"
+                streamlit-canary = { version = "^0.1.1a16", source = \\
                 "likianta" }
                 
                 # --- B
@@ -246,7 +246,7 @@ def main(
                 
                 [[tool.poetry.source]]
                 name = "likianta"
-                url = "http://localhost:2131/"
+                url = "http://localhost:2191/"
                 priority = "supplemental"
                 
                 [build-system]
