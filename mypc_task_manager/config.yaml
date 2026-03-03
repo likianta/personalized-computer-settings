@@ -17,11 +17,11 @@
 #     - <por> jupyter notebook --no-browser --ip 0.0.0.0 --port 2161 ..
 #     - <bore> -p 2161 2161
 #   cwd: <likianta>/documents/gitbook/scripts
+- name: intranet messenging
+  cmd: <strun> 2017 projects/intranet_messenging/ui.py
+  cwd: <likianta>/workspace/dev.master.likianta/mini-toolbox
 - name: latest package on pypi
   cmd: <strun> 2013 projects/latest_package_on_pypi/app_st.py
-  cwd: <likianta>/workspace/dev.master.likianta/mini-toolbox
-- name: local chatapp
-  cmd: <strun> 2017 projects/intranet_messenging/ui.py
   cwd: <likianta>/workspace/dev.master.likianta/mini-toolbox
 - name: make symlink
   cmd: <strun> 2009 projects/mklink_gui/app.py
@@ -60,10 +60,10 @@
     - <bore> -p 2191 2191
     - <bore> -p 2192 2192
     - <bore> -p 2193 2193
-- name: temp share anything (local)
-  cmd: dufs -A -p 2005 <likianta>/temp/2026-03
+- name: temp share anything (localhost)
+  cmd: dufs -A -p 2019 <likianta>/temp/2026-03
 - name: temp share to public
-  cmd: <bore> -p 2005 2005
+  cmd: <bore> -p 2019 2019
 - name: teslamate
   cmd:
     # - <bore> -p 2003 2003

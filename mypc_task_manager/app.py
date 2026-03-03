@@ -44,74 +44,93 @@ def main() -> None:
                     else '\n'.join(f'- `{x}`' for x in item['cmd'])
                 )
                 
-                if key in state['running_tasks']:
-                    if st.button(
-                        'Stop',
-                        key='{}:stop'.format(key),
-                        help=help_text,
-                        use_container_width=True,
-                        type='primary',  # red bg
-                    ):
-                        xlist = state['running_tasks'].pop(key)
-                        for x in xlist:
-                            if isinstance(x, Popen):
-                                x.kill()
-                            else:
-                                pid = x
-                                parent = psutil.Process(pid)
-                                print(
-                                    ':v7',
-                                    'kill process: {} ({})'.format(
-                                        pid, parent.name()
-                                    )
-                                )
-                                for child in parent.children(recursive=True):
-                                    print(
-                                        ':v7',
-                                        '|- kill child process: {} ({})'.format(
-                                            child.pid, child.name()
-                                        )
-                                    )
-                                    # noinspection PyUnresolvedReferences
-                                    try:
-                                        child.kill()
-                                    except psutil.NoSuchProcess:
-                                        pass
-                                # noinspection PyUnresolvedReferences
-                                try:
-                                    parent.kill()
-                                except psutil.NoSuchProcess:
-                                    pass
-                        
-                        st.rerun()
-                else:
-                    if st.button(
-                        'Run',
-                        key='{}:run'.format(key),
-                        help=help_text,
-                        use_container_width=True,
-                    ):
-                        if isinstance(item['cmd'], str):
-                            cmd_list = (item['cmd'],)
-                        else:
-                            cmd_list = item['cmd']
-                        cwd = item.get('cwd')
-                        for cmd in cmd_list:
-                            process = _run_command(cmd, cwd)
-                            state['running_tasks'][key].append(process)
-                        # backup to local disk in case session destroyed.
-                        _backup_running_tasks()
-                        st.rerun()
+                with sc.row():
+                    if key in state['running_tasks']:
+                        _stop_button(key, help_text)
+                    else:
+                        _start_button(item, key, help_text)
+                    _command_edit_button(key)
     
     st.divider()
     with sc.row():
-        if sc.long_button('Reload config'):
+        if st.button('Reload config'):
             state['config'] = fs.load(fs.xpath('config.yaml'))
             st.rerun()
-        if sc.long_button('Restore sessions'):
+        if st.button('Restore sessions'):
             _restore_running_tasks()
             st.rerun()
 
+
+def _command_edit_button(key):
+    if st.button(
+        '⚙️',  # https://getemoji.com/
+        key='{}:edit'.format(key),
+        help='Edit the command. :red[(Not implemented)]',
+    ):
+        pass
+
+
+def _start_button(item, key, help_text):
+    if st.button(
+        'Run',
+        key='{}:run'.format(key),
+        help=help_text,
+        width='stretch',
+    ):
+        if isinstance(item['cmd'], str):
+            cmd_list = (item['cmd'],)
+        else:
+            cmd_list = item['cmd']
+        cwd = item.get('cwd')
+        for cmd in cmd_list:
+            process = _run_command(cmd, cwd)
+            state['running_tasks'][key].append(process)
+        # backup to local disk in case session destroyed.
+        _backup_running_tasks()
+        st.rerun()
+
+
+def _stop_button(key, help_text):
+    if st.button(
+        'Stop',
+        key='{}:stop'.format(key),
+        help=help_text,
+        width='stretch',
+        type='primary',  # red bg
+    ):
+        xlist = state['running_tasks'].pop(key)
+        for x in xlist:
+            if isinstance(x, Popen):
+                x.kill()
+            else:
+                pid = x
+                parent = psutil.Process(pid)
+                print(
+                    ':v7',
+                    'kill process: {} ({})'.format(
+                        pid, parent.name()
+                    )
+                )
+                for child in parent.children(recursive=True):
+                    print(
+                        ':v7',
+                        '|- kill child process: {} ({})'.format(
+                            child.pid, child.name()
+                        )
+                    )
+                    # noinspection PyUnresolvedReferences
+                    try:
+                        child.kill()
+                    except psutil.NoSuchProcess:
+                        pass
+                # noinspection PyUnresolvedReferences
+                try:
+                    parent.kill()
+                except psutil.NoSuchProcess:
+                    pass
+        st.rerun()
+
+# ------------------------------------------------------------------------------
 
 def _backup_running_tasks() -> None:
     data = {}
