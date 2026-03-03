@@ -8,15 +8,16 @@ packages = [{ include = "mypc_settings" }]
 
 [tool.poetry.dependencies]
 python = "^3.12"
-argsense = { version = "^1.0.1", source = "likianta" }
-ipython = "^9.4.0"
-lk-logger = { version = "^6.0.7a1", source = "likianta" }
-lk-utils = { version = "^3.3.0a17", source = "likianta" }
+argsense = { version = "^1.1.1a0", source = "likianta" }
+# ipython = "^9.10.0"
+lk-logger = { version = ">=6.0.7,<6.1.0", source = "likianta" }
+lk-utils = { version = "^3.5.0a11", source = "likianta" }
 netifaces = "^0.11.0"
 # netifaces2 = "^0.0.22"
-psutil = "^6.1.1"
-pywin32 = { version = "^308", platform = "win32" }
-streamlit = ">=1.45.0,<1.46.0"
+psutil = "^7.2.2"
+pywin32 = { version = "^311", platform = "win32" }
+streamlit = "^1.54.0"
+streamlit-canary = { version = "^0.1.1a18", source = "likianta" }
 
 [[tool.poetry.source]]
 name = "tsinghua"
@@ -25,7 +26,7 @@ priority = "primary"
 
 [[tool.poetry.source]]
 name = "likianta"
-url = "http://localhost:2131/"
+url = "http://localhost:2191/"
 priority = "supplemental"
 
 [build-system]

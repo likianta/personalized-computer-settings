@@ -3,5 +3,6 @@
 /config/keymap.ahk
 /config/user.yaml
 /links/
+/mypc_task_manager/_running_tasks.json
 /_temp.vbs
 __pycache__/
