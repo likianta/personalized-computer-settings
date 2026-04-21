@@ -1,5 +1,4 @@
 import os
-
 if 'BORE_SECRET' not in os.environ:
     raise Exception('set BORE env first.')
 
@@ -14,7 +13,6 @@ from lk_utils import fs
 from lk_utils import run_cmd_line
 from lk_utils.subproc import Popen
 
-
 def _init() -> dict:
     """
     returns:
@@ -28,9 +26,7 @@ def _init() -> dict:
         'running_tasks': defaultdict(list)
     }
 
-
 state = sc.init_state(_init, version=5)
-
 
 def main() -> None:
     cols = st.columns(4)
@@ -60,7 +56,6 @@ def main() -> None:
             _restore_running_tasks()
             st.rerun()
 
-
 def _command_edit_button(key):
     if st.button(
         '⚙️',  # https://getemoji.com/
@@ -68,7 +63,6 @@ def _command_edit_button(key):
         help='Edit the command. :red[(Not implemented)]',
     ):
         pass
-
 
 def _start_button(item, key, help_text):
     if st.button(
@@ -88,7 +82,6 @@ def _start_button(item, key, help_text):
         # backup to local disk in case session destroyed.
         _backup_running_tasks()
         st.rerun()
-
 
 def _stop_button(key, help_text):
     if st.button(
@@ -138,7 +131,6 @@ def _backup_running_tasks() -> None:
         data[key] = [proc.pid for proc in proc_list]
     fs.dump(data, fs.xpath('_running_tasks.json'))
 
-
 def _restore_running_tasks() -> None:
     data = fs.load(fs.xpath('_running_tasks.json'))
     for key, pids in data.items():
@@ -147,16 +139,14 @@ def _restore_running_tasks() -> None:
         else:
             state['running_tasks'][key] = pids
 
-
 def _run_command(cmd: str, cwd: t.Optional[str]) -> Popen:
     assert 'VIRTUAL_ENV' not in os.environ
     cmd = _inplace_variables(cmd)
     if cwd: cwd = cwd.replace('<likianta>', 'C:/Likianta')
     print(cmd, cwd, ':v2l')
-    return run_cmd_line(
+    return t.cast(Popen, run_cmd_line(
         cmd, cwd=cwd, blocking=False, verbose=True, force_term_color=True
-    )
-
+    ))
 
 def _inplace_variables(cmd: str) -> str:
     
@@ -175,7 +165,7 @@ def _inplace_variables(cmd: str) -> str:
                 #     if sys.platform == 'linux' else
                 #     socket.gethostbyname(socket.gethostname())
                 # )
-                rsp = run_cmd_line('ipconfig', shell=True)
+                rsp = t.cast(str, run_cmd_line('ipconfig', shell=True))
                 rsp = rsp[rsp.index('Wireless LAN adapter Wi-Fi'):]
                 ip = re.search(r'IPv4 Address.+: ([.\d]+)', rsp).group(1)
                 return ip
@@ -200,7 +190,6 @@ def _inplace_variables(cmd: str) -> str:
         raise Exception(m.group())
     
     return re.sub(r'<(\w+)>', _inplace, cmd)
-
 
 if __name__ == '__main__':
     # $env.BORE_SECRET = '...'

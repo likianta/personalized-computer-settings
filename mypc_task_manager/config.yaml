@@ -20,9 +20,6 @@
 - name: intranet messenging
   cmd: <strun> 2017 projects/intranet_messenging/ui.py
   cwd: <likianta>/workspace/dev.master.likianta/mini-toolbox
-- name: latest package on pypi
-  cmd: <strun> 2013 projects/latest_package_on_pypi/app_st.py
-  cwd: <likianta>/workspace/dev.master.likianta/mini-toolbox
 - name: make symlink
   cmd: <strun> 2009 projects/mklink_gui/app.py
   cwd: <likianta>/workspace/dev.master.likianta/mini-toolbox
@@ -53,15 +50,16 @@
   cmd:
     - <strun> 2190 src/dev_dist/app.py
     - <python> -m http.server 2191 -d data/dev_dist
-    - dufs -A -p 2192 data/dev_dist
+    - dufs --allow-upload --allow-search --allow-symlink -p 2192 data/dev_dist
     - <python> -m http.server 2193 -d data/reqlock
+  cwd: <likianta>/workspace/dev.master.likianta/likianta-domain
 - name: self-hosted pypi (public)
   cmd:
     - <bore> -p 2191 2191
     - <bore> -p 2192 2192
     - <bore> -p 2193 2193
 - name: temp share anything (localhost)
-  cmd: dufs -A -p 2019 <likianta>/temp/2026-03
+  cmd: dufs --allow-upload --allow-search --allow-symlink -p 2019 <likianta>/temp/2026-04
 - name: temp share to public
   cmd: <bore> -p 2019 2019
 - name: teslamate
