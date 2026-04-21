@@ -26,21 +26,22 @@ alias:
   pob: <po> build -f wheel
   poe: <po> env info
   poi: <po> install --no-root
+  pom: <po> run python -m
   por: <po> run
   pou: <po> update
   pox: <po> run python
   # ---
-  strun: <por> streamlit run --browser.gatherUsageStats false --runner.magicEnabled false --server.headless true --server.port
+  strun: <por> -- streamlit run --browser.gatherUsageStats false --runner.magicEnabled false --server.headless true --server.port
 environment:
   ANDROID_HOME: <home>/apps/android/sdk
   ANDROID_SDK_ROOT: <home>/apps/android/sdk
   CARGO_HOME: <home>/apps/rust/cargo
-  # FLUTTER_STORAGE_BASE_URL: https://storage.flutter-io.cn
+  FLUTTER_STORAGE_BASE_URL: https://storage.flutter-io.cn
   HTTP_PROXY: http://127.0.0.1:7890
   HTTPS_PROXY: http://127.0.0.1:7890
   NO_PROXY: localhost,127.0.0.1,192.168.*,::1
   PATH:
-    - <home>/apps/android/sdk/cmdline-tools/latest/bin
+    - <home>/apps/android/sdk/cmdline-tools/<version>/bin
     - <home>/apps/android/sdk/platform-tools
     - <home>/apps/bore
     - <home>/apps/dufs
@@ -60,7 +61,7 @@ environment:
     - C:/Windows/System32/WindowsPowerShell/v1.0
   PNPM_HOME: <home>/apps/nodejs/pnpm
   PUB_CACHE: <home>/documents/appdata/flutter/pub-cache
-  # PUB_HOSTED_URL: https://pub.flutter-io.cn
+  PUB_HOSTED_URL: https://pub.flutter-io.cn
   PYTHONPATH:
     - .
     - src

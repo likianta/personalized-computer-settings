@@ -135,19 +135,19 @@ def _reformat_shortcut_paths(shortcuts: dict) -> dict:
 def reformat_path(
     path: str,
     error_scheme: str = 'raise',
-    custom_replacer: t.Callable[[str], str] = None
+    custom_replacer: t.Optional[t.Callable[[str], str]] = None
 ) -> str:
     """
     errors: 'raise' or 'as_is'
     """
-    _parent = fs.parent(path)  # a dir path
     
-    def inplace(m: re.Match) -> str:
+    def _inplace1(m: re.Match) -> str:
         item = m.group(1)
         # print(item, ':v')
         match item:
-            case 'date':
-                return _find_latest_date(_parent)
+            case 'appdata':
+                assert sys.platform == 'win32'
+                return 'C:/Users/Likianta/AppData'
             case 'desktop':
                 match sys.platform:
                     case 'darwin':
@@ -160,8 +160,17 @@ def reformat_path(
                 return home
             case 'mm':
                 return timestamp('m')
+            # case 'scoop':
+            #     assert sys.platform == 'win32'
+            #     return 'C:/Users/Likianta/scoop'
             case 'shortcut':
                 return f'{home}/shortcut'
+            case 'start_menu':
+                assert sys.platform == 'win32'
+                return (
+                    'C:/Users/Likianta/AppData/Roaming/Microsoft/Windows'
+                    '/Start Menu'
+                )
             case 'user_home':
                 match sys.platform:
                     case 'darwin':
@@ -170,33 +179,40 @@ def reformat_path(
                         return '/home/likianta'
                     case 'win32':
                         return 'C:/Users/Likianta'
-            case 'ver':
-                return _find_latest_version(_parent)
             case 'yyyy':
                 return timestamp('y')
-        
-        if sys.platform == 'win32':
-            match item:
-                case 'appdata':
-                    return 'C:/Users/Likianta/AppData'
-                # case 'scoop':
-                #     return 'C:/Users/Likianta/scoop'
-                case 'start_menu':
-                    return (
-                        'C:/Users/Likianta/AppData/Roaming/Microsoft/Windows/'
-                        'Start Menu'
-                    )
-        
-        # noinspection PyTypeChecker
-        if custom_replacer and (x := custom_replacer(item)):
-            return x
-        
-        if error_scheme == 'as_is':
-            return m.group(0)
-        else:
-            raise Exception(item)
+            case _:
+                if custom_replacer and (x := custom_replacer(item)):
+                    return x
+                else:
+                    # others ('<date>', '<ver>', '<version>', etc.) are 
+                    # "recursive" patterns, they require "parent_path" to be 
+                    # evaluated first. 
+                    # this function doesn't handle them. turn to `_inplace2()` 
+                    # laterly.
+                    return item
     
-    return re.sub(r'<(\w+)>', inplace, path)
+    path = re.sub(r'<(\w+)>', _inplace1, path)
+
+    _parent = fs.parent(path)  # a dir path
+    assert not re.search(r'<(\w+)>', _parent)
+
+    def _inplace2(m: re.Match) -> str:
+        item = m.group(1)
+        match item:
+            case 'date':
+                return _find_latest_date(_parent)
+            case 'ver':
+                return _find_latest_version(_parent)
+            case 'version':
+                return _find_latest_version(_parent)
+            case _:
+                if error_scheme == 'as_is':
+                    return m.group(0)
+                else:
+                    raise Exception(item)
+    
+    return re.sub(r'<(\w+)>', _inplace2, path)
 
 
 def _find_latest_date(dir: str) -> str:

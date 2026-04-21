@@ -13,6 +13,7 @@ from lk_utils.textwrap import join
 
 from mypc_settings import load_config
 from mypc_settings import reformat_path
+from mypc_settings.windows_environment_settings import update_user_environment
 
 
 def main(
@@ -61,8 +62,7 @@ def main(
             output.append('')
         case 'windows':
             assert platform == 'win32'
-            from mypc_settings import make_windows_user_environment_variables
-            make_windows_user_environment_variables.main(config_file)
+            update_user_environment(cfg['environment'])
     
     # alias
     for key, val in cfg['alias'].items():
