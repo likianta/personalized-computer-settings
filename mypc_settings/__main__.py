@@ -1,17 +1,13 @@
 import sys
-
 from argsense import cli
-
 from . import init_home_directories
 from .config import load_config
 
 cli.add_cmd(init_home_directories.main, 'init-home-dirs')
 
-
 @cli.cmd('preview')
 def preview_config(file: str) -> None:
     print(':l', load_config(file))
-    
     
 @cli.cmd()
 def setup(
@@ -40,6 +36,10 @@ def setup(
     from .make_shortcut import main
     main(file, overwrite_shortcuts, clean_shortcuts)
 
+@cli.cmd()
+def update_environment(file: str = 'config/default.yaml') -> None:
+    from .windows_environment_settings import update_user_environment
+    update_user_environment(load_config(file)['environment'])
 
 if __name__ == '__main__':
     # pox -m mypc_settings -h

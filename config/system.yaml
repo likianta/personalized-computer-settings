@@ -56,7 +56,9 @@ environment:
     - <home>/apps/python/3.14/Scripts
     - <home>/apps/rust/cargo/bin
     - <home>/apps/scoop/shims
+    - <home>/apps/vlang
     - <home>/apps/vscode/bin
+    - bin
     # - C:/Program Files/PowerShell/7
     - C:/Windows/System32/WindowsPowerShell/v1.0
   PNPM_HOME: <home>/apps/nodejs/pnpm
